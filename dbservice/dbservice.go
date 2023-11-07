@@ -33,6 +33,7 @@ func Initialize() (db *sql.DB, err error) {
 		Net:    c.Net,
 		Addr:   c.Addr,
 		DBName: c.DBName,
+		AllowNativePasswords: true,
 	}
 
 	db, err = sql.Open("mysql", cfg.FormatDSN())
@@ -48,7 +49,7 @@ func Initialize() (db *sql.DB, err error) {
 	return db, nil
 }
 
-func getConnection(configUri string) (c *Connection, err error) {
+func getConnection(configUri string) (c Connection, err error) {
 	f, err := os.Open(configUri)
 	if err != nil {
 		return c, err
