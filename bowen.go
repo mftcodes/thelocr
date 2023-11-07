@@ -14,7 +14,7 @@ func main() {
     router.GET("/api/address", GetAddrs)
     router.GET("/api/address/:id", GetAddrById)
 
-    router.Run("10.192.184.100:8080")
+    router.Run("localhost:8080")
 }
 
 func GetAddrs(c *gin.Context) {
