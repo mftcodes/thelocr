@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  bowen-mysql-db:
+    image: mysql:8.2.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 9YCoZ#ULdVQQvmcF
+      MYSQL_DATABASE: minuchin
+    ports:
+      - "3308:3306"

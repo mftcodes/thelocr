@@ -21,8 +21,23 @@ type Connection struct {
 }
 
 func Initialize() (db *sql.DB, err error) {
+	var connectionFileUri string
+	env := os.Getenv("ENV")
+	if env == "" {
+		env = "dev"
+	}
+
+	if env == "dev" {
+		setupLocalDevEnv()
+		if err != nil {
+			return db, err
+		}
+		connectionFileUri = setLocalConfFileUri()
+	} else {
+		connectionFileUri = setProdConfFileUri()
+	}
 	// TODO: add URI and adjust code when we have a definitive answer to where and how to store this information
-	c, err := getConnection("/etc/proj.bowen/minuchin.conf")
+	c, err := getConnection(connectionFileUri)
 	if err != nil {
 		return db, err
 	}
@@ -87,6 +102,36 @@ func getConnection(configUri string) (c Connection, err error) {
 	}
 
 	return c, nil
+}
+
+func setupLocalDevEnv() error {
+	tempDir := setLocalConfDir()
+	err := os.Mkdir(tempDir, 0750)
+	if err != nil && !os.IsExist(err) {
+		return err
+	}
+
+	testfile := fmt.Sprintln("USER=root\nPASSWD=9YCoZ#ULdVQQvmcF\nNET=tcp\nSERVER=localhost:3308\nDB=minuchin")
+
+	fileUri := setLocalConfFileUri()
+	err = os.WriteFile(fileUri, []byte(testfile), 0750)
+	if err != nil && !os.IsExist(err) {
+		return err
+	}
+
+	return nil
+}
+
+func setLocalConfDir() string {
+	return "/tmp/project.bowen/"
+}
+
+func setLocalConfFileUri() string {
+	return "/tmp/project.bowen/localdev.conf"
+}
+
+func setProdConfFileUri() string {
+	return "/etc/project.bowen/minuchin.conf"
 }
 
 func GetAddrById(id string) models.Address {
