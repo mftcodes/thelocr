@@ -28,11 +28,11 @@ func Initialize() (db *sql.DB, err error) {
 	}
 
 	cfg := mysql.Config{
-		User:   c.User,
-		Passwd: c.Passwd,
-		Net:    c.Net,
-		Addr:   c.Addr,
-		DBName: c.DBName,
+		User:                 c.User,
+		Passwd:               c.Passwd,
+		Net:                  c.Net,
+		Addr:                 c.Addr,
+		DBName:               c.DBName,
 		AllowNativePasswords: true,
 	}
 
@@ -91,60 +91,60 @@ func getConnection(configUri string) (c Connection, err error) {
 
 func GetAddrById(id string) models.Address {
 	db, err := Initialize()
-    if err != nil {
-        panic(err)
-    }
+	if err != nil {
+		panic(err)
+	}
 	defer db.Close()
-	
+
 	var addr models.Address
 	sql := fmt.Sprintf(`
 		SELECT * 
 		  FROM address 
 		 WHERE addr_id = %s;
 	`, id)
-    rows, err := db.Query(sql)
-    if err != nil {
-        panic(err)
-    }
+	rows, err := db.Query(sql)
+	if err != nil {
+		panic(err)
+	}
 	defer rows.Close()
 
-    for rows.Next() {
-        err := rows.Scan(&addr.Addr_id, &addr.Addr_uuid, &addr.Line_1, &addr.Line_2, &addr.Line_3, &addr.City, &addr.County, &addr.State, &addr.Postal_code, &addr.Created, &addr.Created_by, &addr.Modified, &addr.Modified_by)
-        if err != nil {
+	for rows.Next() {
+		err := rows.Scan(&addr.Addr_id, &addr.Addr_uuid, &addr.Line_1, &addr.Line_2, &addr.Line_3, &addr.City, &addr.County, &addr.State, &addr.Postal_code, &addr.Created, &addr.Created_by, &addr.Modified, &addr.Modified_by)
+		if err != nil {
 			panic(err)
-        }
-    }
+		}
+	}
 
-    return addr
+	return addr
 }
 
 func GetAllAddrs() []models.Address {
 	db, err := Initialize()
-    if err != nil {
-        panic(err)
-    }
+	if err != nil {
+		panic(err)
+	}
 	defer db.Close()
-	
+
 	var addrs []models.Address
 	sql := `
 		SELECT * 
 		  FROM address 
 		 ORDER BY addr_id;
 	`
-    rows, err := db.Query(sql)
-    if err != nil {
-        panic(err)
-    }
+	rows, err := db.Query(sql)
+	if err != nil {
+		panic(err)
+	}
 	defer rows.Close()
 
-    for rows.Next() {
-        var addr models.Address
-        err := rows.Scan(&addr.Addr_id, &addr.Addr_uuid, &addr.Line_1, &addr.Line_2, &addr.Line_3, &addr.City, &addr.County, &addr.State, &addr.Postal_code, &addr.Created, &addr.Created_by, &addr.Modified, &addr.Modified_by)
-        if err != nil {
+	for rows.Next() {
+		var addr models.Address
+		err := rows.Scan(&addr.Addr_id, &addr.Addr_uuid, &addr.Line_1, &addr.Line_2, &addr.Line_3, &addr.City, &addr.County, &addr.State, &addr.Postal_code, &addr.Created, &addr.Created_by, &addr.Modified, &addr.Modified_by)
+		if err != nil {
 			panic(err)
-        }
-        addrs = append(addrs, addr)
-    }
+		}
+		addrs = append(addrs, addr)
+	}
 
-    return addrs
+	return addrs
 }
