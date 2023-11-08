@@ -21,5 +21,8 @@ bowen
 # Go workspace file
 go.work
 
-# configs
+# config
 *.conf
+
+# Dev notes
+zz_notes.txt
