@@ -9,6 +9,7 @@ import (
 )
 
 var addressController = new(controllers.AddressController)
+var resourceController = new(controllers.ResourceController)
 
 func InitRouter() *gin.Engine {
 	r := gin.Default()
@@ -22,6 +23,10 @@ func InitRouter() *gin.Engine {
 		{
 			address.GET("", addressController.List)
 			address.GET(":id", addressController.Detail)
+		}
+		resource := api.Group("/resource")
+		{
+			resource.PUT("", resourceController.Create)
 		}
 	}
 
