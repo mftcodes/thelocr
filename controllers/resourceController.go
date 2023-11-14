@@ -27,3 +27,21 @@ func (rc *ResourceController) Create(c *gin.Context) {
 	}
 	c.Status(http.StatusOK)
 }
+
+func (rc *ResourceController) Search(c *gin.Context) {
+	var terms models.ResourceSearchBase
+	if err := c.ShouldBindJSON(&terms); err != nil {
+		// Need to get rid of the error sending back, need to log send back generic message, or 500?
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	result, err := resourceService.SearchBase(terms)
+	if err != nil {
+		// Need to get rid of the error sending back, need to log send back generic message, or 500?
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.IndentedJSON(http.StatusOK, result)
+}

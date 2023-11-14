@@ -34,3 +34,11 @@ func (rs *ResourceService) Update() {
 func (rs *ResourceService) Delete() {
 
 }
+
+func (rs *ResourceService) SearchBase(terms models.ResourceSearchBase) ([]models.ResourceDetail, error) {
+	result, err := resourceRepository.SearchBase(terms)
+	if err != nil {
+		return result, err
+	}
+	return result, nil
+}

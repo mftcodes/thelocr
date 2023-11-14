@@ -27,6 +27,7 @@ func InitRouter() *gin.Engine {
 		resource := api.Group("/resource")
 		{
 			resource.PUT("", resourceController.Create)
+			resource.POST("/search", resourceController.Search)
 		}
 	}
 

@@ -21,6 +21,27 @@ type Resource struct {
 	Modified_by   sql.NullString `json: "modified_by"`
 }
 
+type ResourceDetail struct {
+	Res_uuid    string         `json: "res_uuid"`
+	Res_title   sql.NullString `json: "res_title"`
+	Res_desc    sql.NullString `json: "res_desc"`
+	Url         sql.NullString `json: "url"`
+	Addr_uuid   string         `json: "addr_uuid"`
+	Line_1      sql.NullString `json: "line_1"`
+	Line_2      sql.NullString `json: "line_2"`
+	Line_3      sql.NullString `json: "line_3"`
+	City        sql.NullString `json: "city"`
+	County      sql.NullString `json: "county"`
+	State       sql.NullString `json: "state"`
+	Postal_code sql.NullString `json: "postal_code"`
+	Con_uuid    string         `json: "con_uuid"`
+	Phone_1     sql.NullString `json: "phone_1"`
+	Phone_2     sql.NullString `json: "phone_2"`
+	Phone_tty   sql.NullString `json: "phone_tty"`
+	Fax         sql.NullString `json: "fax"`
+	Email       sql.NullString `json: "email"`
+}
+
 type ResourceInsert struct {
 	Created_by   string `json: "created_by"`
 	Res_title    string `json: "res_title"`
@@ -41,5 +62,12 @@ type ResourceInsert struct {
 	Phone_tty    string `json: "phone_tty"`
 	Fax          string `json: "fax"`
 	Email        string `json: "email"`
+	Category_id  int    `json: "cat_id"`
+}
+
+type ResourceSearchBase struct {
+	Is_statewide bool   `json: "is_statewide"`
+	County       string `json: "county"`
+	State        string `json: "state"`
 	Category_id  int    `json: "cat_id"`
 }
