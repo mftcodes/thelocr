@@ -24,15 +24,3 @@ func (as *AddressService) GetAll() ([]models.Address, error) {
 	}
 	return addrs, nil
 }
-
-func (as *AddressService) Create() {
-
-}
-
-func (as *AddressService) Update() {
-
-}
-
-func (as *AddressService) Delete() {
-
-}
