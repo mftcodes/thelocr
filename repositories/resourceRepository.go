@@ -28,6 +28,32 @@ func (rr *ResourceRepository) Create(res models.ResourceInsert) (sql.Result, err
 	return result, nil
 }
 
+func (rr *ResourceRepository) SearchBase(terms models.ResourceSearchBase) ([]models.ResourceDetail, error) {
+	var resDetails []models.ResourceDetail
+	isStatewide := boolToBit(terms.Is_statewide)
+
+	sql := fmt.Sprintf(`
+	CALL minuchin.sp_searchResourceBase(%d, '%s', '%s', %d);
+	`, isStatewide, terms.County, terms.State, terms.Category_id)
+
+	rows, err := config.DBConn.Query(sql)
+	if err != nil {
+		return resDetails, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var resDet models.ResourceDetail
+		err := rows.Scan(&resDet.Res_uuid, &resDet.Res_title, &resDet.Res_desc, &resDet.Url, &resDet.Addr_uuid, &resDet.Line_1, &resDet.Line_2, &resDet.Line_3, &resDet.City, &resDet.County, &resDet.State, &resDet.Postal_code, &resDet.Con_uuid, &resDet.Phone_1, &resDet.Phone_2, &resDet.Phone_tty, &resDet.Fax, &resDet.Email)
+		if err != nil {
+			panic(err)
+		}
+		resDetails = append(resDetails, resDet)
+	}
+
+	return resDetails, nil
+}
+
 func boolToBit(val bool) uint8 {
 	if val {
 		return 1
