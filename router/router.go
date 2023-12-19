@@ -10,6 +10,7 @@ import (
 
 var addressController = new(controllers.AddressController)
 var resourceController = new(controllers.ResourceController)
+var categoryController = new(controllers.CategoryController)
 
 func InitRouter() *gin.Engine {
 	r := gin.Default()
@@ -28,6 +29,10 @@ func InitRouter() *gin.Engine {
 		{
 			resource.PUT("", resourceController.Create)
 			resource.POST("/search", resourceController.Search)
+		}
+		category := api.Group("/category")
+		{
+			category.GET("", categoryController.List)
 		}
 	}
 
