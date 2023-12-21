@@ -11,18 +11,38 @@
     <link rel="stylesheet" href="styles/style.css" />
 </head>
 
-<body onload="getCategories()">
+<body onload="init()">
     <div class="container">
-        <h1 id="title" class="center">Community Resources</h1>
-        <div id="search" class="row pt center">
-            <label for="searchTerm">Search: </label>
-            <input type="text" id="searchTerm" name="searchTerm" required minlength="3" size="30" />
+        <h1 id="title" class="center pb">Community Resources</h1>
+        <div class="row pt center">
+            <label for="county">County: </label>
+            <select name="county" id="county">
+                <option value="">Choose input...</option>
+            </select>
         </div>
         <div class="row pt center">
-            <lable for="category">Category: </lable>
+            <label for="category">Category: </label>
             <select name="category" id="category">
                 <option value="">Choose input...</option>
             </select>
+        </div>
+        <!-- <div id="search" class="row pt center">
+            <label for="searchTerm">Search: </label>
+            <input type="text" id="searchTerm" name="searchTerm" required minlength="3" size="30" />
+        </div> -->
+        <div class="row center pt pb">
+            <button class="btn-search"
+                id="searchBtn" 
+                type="button"
+            >
+                Search
+            </button>
+        </div>
+    </div>
+    <div class="container" id="results">
+        <h2 class="center pb">Results</h2>
+        <div class="res-container" id="res-container">
+            <!-- programatically insert results cards -->
         </div>
     </div>
 
