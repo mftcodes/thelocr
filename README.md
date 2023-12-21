@@ -9,6 +9,9 @@ My hope is that this API is the base building block to begin addressing this pro
 This is a work in progress...
 
 ## Setting up the program and running it locally
+Go API is based on Go version `1.21.1`, and this must be installed. See [Go docs](https://go.dev/doc/install) for details on installation. 
+
+### Go Back End API, Option 1
 1. setup MySQL in Docker
     1. `cd` into `docker` directory and run `docker compose up`
     2. once container is spun up, connect to MySQL
@@ -49,7 +52,32 @@ This is a work in progress...
     ```
 7. Optional: clean up, run `go clean -modcache` to clean up install cache
 
+### Go Back End API, Option 2: Running debugger in VSCodium
+1. Need to create the `launch.json` file under the `Run and Debug` tab
+2. Use the following configuration:
+    ```
+        "configurations": [
+        {
+            "name": "API ONLY",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "{YOUR_PATH_TO}/bowen.go"
+        }
+    ]
+    ```
+    *Be sure to update the program path
+3. You should be able to use the green `Start Debugging` button, or use `F5` to begin debugging
+4. Hit the API with Insomnia or Postman
+5. This will also serve up the API for the front end
+6. [Digital Ocean](https://www.digitalocean.com/community/tutorials/debugging-go-code-with-visual-studio-code) has a good article about debugging go that may be helpful here 
+
+### Running the Front End Web Server (VSCodium specific)
+1. Add the `Live Server` extension from `ritwickdey` found [here](https://open-vsx.org/extension/ritwickdey/LiveServer)
+2. Click `Go Live` at the bottom of the VSC window and web server should launch
+3. If you run into problems here, read the `Live Server` docs
+
 ## Why "Bowen"?
-Simply a former Marriage and Family Therpist (MFT) giving nod to the theorist(s) who started the MFT field. 
+Simply a former Marriage and Family Therapist (MFT) giving nod to one of the theorists who helped start the MFT field.
 
 ### To Be Continued...

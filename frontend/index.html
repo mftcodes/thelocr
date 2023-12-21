@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Bowen</title>
+    <link rel="stylesheet" href="styles/style.css" />
+</head>
+
+<body onload="init()">
+    <div class="container">
+        <h1 id="title" class="center pb">Community Resources</h1>
+        <div class="row pt center">
+            <label for="county">County: </label>
+            <select name="county" id="county">
+                <option value="">Choose input...</option>
+            </select>
+        </div>
+        <div class="row pt center">
+            <label for="category">Category: </label>
+            <select name="category" id="category">
+                <option value="">Choose input...</option>
+            </select>
+        </div>
+        <div class="row center pt pb">
+            <button class="btn-search"
+                id="searchBtn" 
+                type="button"
+            >
+                Search
+            </button>
+        </div>
+    </div>
+    <div class="container" id="results">
+        <h2 class="center pb">Results</h2>
+        <div class="res-container" id="res-container">
+            <!-- programatically insert results cards -->
+        </div>
+    </div>
+
+
+    <script src="javascript/index.js"></script>
+</body>
+
+</html>
