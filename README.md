@@ -96,6 +96,6 @@ NOTE: You must have the API running in order for the front end to function.
 
 ## Why "Bowen"?
 
-Simply a former Marriage and Family Therapist (MFT) giving nod to one of the theorists who helped start the MFT field.
+Simply a Marriage and Family Therapist (MFT) turned software developer giving nod to one of the theorists who helped start the MFT field.
 
 ### To Be Continued...
