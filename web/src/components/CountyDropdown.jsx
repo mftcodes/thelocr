@@ -10,7 +10,7 @@ const CountyDropdown = ({ label, onChoice }) => {
       method: "GET",
       headers: {
         Accept: "application/json",
-        "X-App-Token": "pfN54eiefkd9jVGWIggUPNIG4",
+        "X-App-Token": "INSERT-API-TOKEN",
       },
     })
       .then((res) => {
