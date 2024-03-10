@@ -40,7 +40,7 @@ NOTE: You must have the API running in order for the front end to function.
    3. Under `connection settings > driver properties >` set `allowPublicKeyRetrieval` to `TRUE` 
    4. Open a query window for the db and run the initDB.sql script
 
-### Go Back End API, Option 1
+## Go Back End API, Option 1
 1. initialize the project from the root directory
    ```
    go mod init bowen
@@ -71,7 +71,7 @@ NOTE: You must have the API running in order for the front end to function.
    ```
 6. Optional: clean up, run `go clean -modcache` to clean up install cache
 
-### Go Back End API, Option 2: Running debugger in VSCodium
+## Go Back End API, Option 2: Running debugger in VSCodium
 
 1. Need to create the `launch.json` file under the `Run and Debug` tab
 2. Use the following configuration:
