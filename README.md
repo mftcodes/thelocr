@@ -18,8 +18,8 @@ For Windows OS we also recommend installing [Docker Desktop](https://www.docker.
 
 NOTE: You must have the API running in order for the front end to function.
 
-### Database Setup: 
-1. Setup MySQL in Docker
+## Database Setup: 
+### Setup MySQL in Docker
    1. `cd` into `docker` directory and run `docker compose up`
    2. once container is spun up, connect to MySQL*:
       1. HOST: `localhost:3308`
@@ -30,14 +30,14 @@ NOTE: You must have the API running in order for the front end to function.
       1. This will set up the db and table structures, as well as stub in a small data set
       2. A longer script for seed the db with a larger data set is currently being worked on and will be added to the repo when ready
 
-#### *Connect to MySql using DBeaver: 
+#### Connect to MySql using DBeaver: 
    1. install Dbeaver if you haven't already
    2. connect to the MySql Instance: 
      1. HOST: `localhost:3308`
      2. DB: `minuchin`
      3. Username: `root`
      4. Password: _obtain from docker yaml file_
-   3. *there was a step here that I don't remember, something to do with drivers or ports????* 
+   3. Under `connection settings > driver properties >` set `allowPublicKeyRetrieval` to `TRUE` 
    4. Open a query window for the db and run the initDB.sql script
 
 ### Go Back End API, Option 1
