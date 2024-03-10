@@ -14,13 +14,14 @@ This is a work in progress...
 
 Go API is based on Go version `1.21.1`, and this must be installed. See [Go docs](https://go.dev/doc/install) for details on installation.
 
+For Windows OS we also recommend installing [Docker Desktop](https://www.docker.com/products/docker-desktop/) and [DBeaver](https://dbeaver.io/download/)
+
 NOTE: You must have the API running in order for the front end to function.
 
-### Go Back End API, Option 1
-
-1. setup MySQL in Docker
+## Database Setup: 
+### Setup MySQL in Docker
    1. `cd` into `docker` directory and run `docker compose up`
-   2. once container is spun up, connect to MySQL
+   2. once container is spun up, connect to MySQL*:
       1. HOST: `localhost:3308`
       2. DB: `minuchin`
       3. Username: `root`
@@ -28,12 +29,24 @@ NOTE: You must have the API running in order for the front end to function.
    3. run the script: `docker/dbDump/initDB.sql`
       1. This will set up the db and table structures, as well as stub in a small data set
       2. A longer script for seed the db with a larger data set is currently being worked on and will be added to the repo when ready
-2. initialize the project from the root directory
+
+#### Connect to MySql using DBeaver: 
+   1. install Dbeaver if you haven't already
+   2. connect to the MySql Instance: 
+     1. HOST: `localhost:3308`
+     2. DB: `minuchin`
+     3. Username: `root`
+     4. Password: _obtain from docker yaml file_
+   3. Under `connection settings > driver properties >` set `allowPublicKeyRetrieval` to `TRUE` 
+   4. Open a query window for the db and run the initDB.sql script
+
+## Go Back End API, Option 1
+1. initialize the project from the root directory
    ```
    go mod init bowen
    go mod tidy
    ```
-3. build all modules (`go build .` should finish without errors)
+2. build all modules (`go build .` should finish without errors)
    1. cd into sub-directories and build, e.g. `models`
       ```
       cd models
@@ -44,21 +57,21 @@ NOTE: You must have the API running in order for the front end to function.
       cd ../{next sub-directory}
       go build .
       ```
-4. cd back to root, install managefs
+3. cd back to root, install managefs
    ```
    go install bowen
    ```
-5. you may need to add to your PATH in order to call the compiled program from BASH
+4. you may need to add to your PATH in order to call the compiled program from BASH
    ```
    export PATH=$PATH:$(dirname $(go list -f '{{.Target}}' .))
    ```
-6. run the program
+5. run the program
    ```
    bowen
    ```
-7. Optional: clean up, run `go clean -modcache` to clean up install cache
+6. Optional: clean up, run `go clean -modcache` to clean up install cache
 
-### Go Back End API, Option 2: Running debugger in VSCodium
+## Go Back End API, Option 2: Running debugger in VSCodium
 
 1. Need to create the `launch.json` file under the `Run and Debug` tab
 2. Use the following configuration:
@@ -78,6 +91,8 @@ NOTE: You must have the API running in order for the front end to function.
 4. Hit the API with Insomnia or Postman
 5. This will also serve up the API for the front end
 6. [Digital Ocean](https://www.digitalocean.com/community/tutorials/debugging-go-code-with-visual-studio-code) has a good article about debugging go that may be helpful here
+
+
 
 ### Running the vanilla HTML/CSS/JS Front End Web Server (VSCodium specific, and likely to be deleted soon)
 

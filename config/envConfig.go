@@ -7,7 +7,7 @@ import (
 
 func SetupLocalDevEnv() error {
 	tempDir := SetLocalConfDir()
-	err := os.Mkdir(tempDir, 0750)
+	err := os.MkdirAll(tempDir, 0750)
 	if err != nil && !os.IsExist(err) {
 		return err
 	}
