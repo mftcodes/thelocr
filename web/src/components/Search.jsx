@@ -2,13 +2,16 @@ import { useState } from "react";
 import Button from "./Button";
 import CountyDropdown from "./CountyDropdown";
 import CategoryDropdown from "./CategoryDropdown";
+import SearchResults from "./SearchResults";
 
-const Search = ({ onSearch }) => {
+export default function Search() {
   const [countySelected, setCountySelected] = useState(false);
   const [county, setCounty] = useState("Make Selection");
   const [categorySelected, setCategorySelected] = useState(false);
   const [category, setCategory] = useState("Make Selection");
   const [categoryId, setCategoryId] = useState(-1);
+  const [searchPayload, setSearchPayload] = useState({});
+  const [resultsReady, setResultsReady] = useState(false);
 
   return (
     <>
@@ -40,15 +43,19 @@ const Search = ({ onSearch }) => {
                 State: "MI",
                 Category_id: categoryId,
               };
-              onSearch(payload);
+              setSearchPayload(payload);
+              setResultsReady(true);
             }}
           >
             Search
           </Button>
         </div>
       )}
+      <div className="container pt-5 results">
+        {resultsReady && (
+          <SearchResults payload={searchPayload}></SearchResults>
+        )}
+      </div>
     </>
   );
-};
-
-export default Search;
+}

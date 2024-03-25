@@ -6,9 +6,8 @@
     --secondary: #285b5e;
 }
 
-#header {
+.header {
     background-color: var(--title);
-    color: white;
 }
 
 .container > .card_bg {
