@@ -2,6 +2,7 @@ import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Header } from "./components/Header";
 import Search from "./components/Search";
 import Edit from "./components/Edit";
+import Detail from "./components/Detail";
 import "./App.css";
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Search />} />
             <Route path="edit" element={<Edit />} />
+            <Route path="detail" element={<Detail />} />
 
             {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
