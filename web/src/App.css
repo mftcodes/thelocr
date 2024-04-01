@@ -10,12 +10,12 @@
     background-color: var(--title);
 }
 
-.container > .card_bg {
+.row > .col > .card_bg {
     background-color: var(--primary_light);
     color: black;
 }
 
-.container > .card_bg__alt {
+.row > .col > .card_bg__alt {
     background-color: var(--secondary);
     color: black;
 }

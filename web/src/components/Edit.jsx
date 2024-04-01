@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Button from "./Button";
 import CountyDropdown from "./CountyDropdown";
 import CategoryDropdown from "./CategoryDropdown";
@@ -8,6 +9,8 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 export default function Edit() {
+  const location = useLocation();
+  const resource = location.state;
   const [county, setCounty] = useState("Make Selection");
   const [countySelected, setCountySelected] = useState(false);
   const [category, setCategory] = useState("Make Selection");
@@ -41,13 +44,14 @@ export default function Edit() {
                 type="text"
                 placeholder="Org. Name"
                 onChange={onInput}
-                value={value}
+                value={resource.Res_title.String}
               />
             </Col>
           </Form.Group>
 
           <Form.Group as={Row} className="mb-3" controlId="formIsParent">
-            <Form.Label column sm={2}></Form.Label>
+            <Form.Label column sm={2}></Form.Label>{" "}
+            {/* Need add to search SProc */}
             <Col sm={10}>
               <Form.Check type="checkbox" label="Headquarters office?" />
               <Form.Text className="text-muted">
@@ -66,7 +70,11 @@ export default function Edit() {
               Description
             </Form.Label>
             <Col sm={10}>
-              <Form.Control as="textarea" placeholder="Description" />
+              <Form.Control
+                as="textarea"
+                placeholder="Description"
+                value={resource.Res_desc.String}
+              />
               <Form.Text className="text-muted">
                 Description of services offered.
               </Form.Text>
@@ -78,7 +86,11 @@ export default function Edit() {
               Website
             </Form.Label>
             <Col sm={10}>
-              <Form.Control type="text" placeholder="Webiste" />
+              <Form.Control
+                type="text"
+                placeholder="Webiste"
+                value={resource.Url.String}
+              />
               <Form.Text className="text-muted">
                 (e.g. www.CommunityHelpers.org).
               </Form.Text>
@@ -102,7 +114,10 @@ export default function Edit() {
               Address
             </Form.Label>
             <Col sm={10}>
-              <Form.Control placeholder="1234 Main St" />
+              <Form.Control
+                placeholder="1234 Main St"
+                value={resource.Line_1.String}
+              />
             </Col>
           </Form.Group>
 
@@ -111,14 +126,17 @@ export default function Edit() {
               Address 2
             </Form.Label>
             <Col sm={10}>
-              <Form.Control placeholder="Apartment, studio, or floor" />
+              <Form.Control
+                placeholder="Apt. #, Suite #, etc."
+                value={resource.Line_2.String}
+              />
             </Col>
           </Form.Group>
 
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formCity">
               <Form.Label>City</Form.Label>
-              <Form.Control />
+              <Form.Control value={resource.City.String} />
             </Form.Group>
             <Form.Group as={Col} controlId="formCounty">
               <Form.Label>County</Form.Label>
@@ -135,15 +153,23 @@ export default function Edit() {
           <Row>
             <Form.Group as={Col} controlId="formState">
               <Form.Label>State</Form.Label>
-              <Form.Select defaultValue="Choose...">
+              <Form.Select
+                defaultValue="Choose..."
+                value={resource.State.String}
+              >
                 <option>Choose...</option>
+                <option value="MI">MI</option>
                 <option>...</option>
               </Form.Select>
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridZip">
               <Form.Label>Zip</Form.Label>
-              <Form.Control />
+              <Form.Control
+                type="text"
+                placeholder="00012"
+                value={resource.Postal_code.String}
+              />
             </Form.Group>
             <p>
               <em>
@@ -159,7 +185,10 @@ export default function Edit() {
               Main Phone
             </Form.Label>
             <Col sm={10}>
-              <Form.Control placeholder="(888) 555 1234" />
+              <Form.Control
+                placeholder="(888) 555 1234"
+                value={resource.Phone_1.String}
+              />
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formPhone2">
@@ -167,7 +196,10 @@ export default function Edit() {
               Alternative Phone
             </Form.Label>
             <Col sm={10}>
-              <Form.Control placeholder="(888) 555 1234" />
+              <Form.Control
+                placeholder="(888) 555 1234"
+                value={resource.Phone_2.String}
+              />
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formPhoneTTY">
@@ -175,7 +207,10 @@ export default function Edit() {
               TTY Phone
             </Form.Label>
             <Col sm={10}>
-              <Form.Control placeholder="(888) 555 1234" />
+              <Form.Control
+                placeholder="(888) 555 1234"
+                value={resource.Phone_tty.String}
+              />
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formFax">
@@ -183,7 +218,10 @@ export default function Edit() {
               Fax
             </Form.Label>
             <Col sm={10}>
-              <Form.Control placeholder="(888) 555 1234" />
+              <Form.Control
+                placeholder="(888) 555 1234"
+                value={resource.Fax.String}
+              />
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formEmail">
@@ -191,7 +229,10 @@ export default function Edit() {
               Email
             </Form.Label>
             <Col sm={10}>
-              <Form.Control placeholder="contact@email.org" />
+              <Form.Control
+                placeholder="contact@email.org"
+                value={resource.Email.String}
+              />
             </Col>
           </Form.Group>
 
@@ -205,7 +246,7 @@ export default function Edit() {
             </Col>
             <Form.Text className="text-muted">
               Keywords to help with search (e.g. "Food insecurity, housing",
-              "legal aid, immigration").
+              "legal aid, immigration"). <em>*Not currently implemented</em>
             </Form.Text>
           </Form.Group>
 
@@ -226,4 +267,8 @@ export default function Edit() {
       </Container>
     </>
   );
+
+  function getTheGoods() {
+    const title = getELementById("formTitle");
+  }
 }
