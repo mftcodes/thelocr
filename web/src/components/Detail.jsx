@@ -1,5 +1,4 @@
-import { useLocation, Link } from "react-router-dom";
-import Button from "./Button";
+import { useLocation } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -131,12 +130,6 @@ export default function Detail() {
             </Row>
           )}
         </div>
-
-        <Row className="pt-4 text-center">
-          <Link to={"/edit"} state={resource}>
-            <Button type="bowen__alt">Edit</Button>
-          </Link>
-        </Row>
       </Container>
     </>
   );

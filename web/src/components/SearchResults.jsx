@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
-import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
@@ -53,19 +52,19 @@ const SearchResults = (payload) => {
 
   return (
     <>
-      <h2 className="text-center">Results</h2>
+      <h2 className="text-center pb-4">Results</h2>
 
       <Row xs={1} md={2} lg={3} className="g-3">
         {resources.map((resource, idx) => (
-          <Col key={idx}>
-            <Card style={{ minHeight: "18.5rem" }} className="card_bg">
-              <Card.Body>
-                <Card.Title>
+          <div className="container pb-2" key={idx}>
+            <div className="card card_bg">
+              <div className="card-body">
+                <div className="card-title">
                   <h4 className="card-title text-center">
                     {resource.Res_title.String}
                   </h4>
-                </Card.Title>
-                <Card.Text>
+                </div>
+                <div className="card-text">
                   <Row className="text-center pb-2">
                     <a
                       href={
@@ -118,17 +117,17 @@ const SearchResults = (payload) => {
                       </Col>
                     </Row>
                   )}
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer>
+                </div>
+              </div>
+              <div className="card-footer">
                 <Row className="text-center">
                   <Link to={"/detail"} state={resource}>
                     <Button type="bowen__alt">Get More Details</Button>
                   </Link>
                 </Row>
-              </Card.Footer>
-            </Card>
-          </Col>
+              </div>
+            </div>
+          </div>
         ))}
       </Row>
     </>
