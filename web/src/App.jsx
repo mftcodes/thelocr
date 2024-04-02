@@ -1,35 +1,47 @@
-import { useState } from "react";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Header } from "./components/Header";
 import Search from "./components/Search";
-import SearchResults from "./components/SearchResults";
+import Detail from "./components/Detail";
 import "./App.css";
 
-function App() {
-  const [searchPayload, setSearchPayload] = useState({});
-  const [resultsReady, setResultsReady] = useState(false);
-
+export default function App() {
   return (
     <>
       <div>
-        <div className="pb-2">
-          <Header />
-        </div>
-        <div className="container">
-          <Search
-            onSearch={(pl) => {
-              setSearchPayload(pl);
-              setResultsReady(true);
-            }}
-          />
-        </div>
-        <div className="container pt-5 results">
-          {resultsReady && (
-            <SearchResults payload={searchPayload}></SearchResults>
-          )}
-        </div>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Search />} />
+            <Route path="detail" element={<Detail />} />
+
+            {/* path="*"" matches anything, so acts as a 
+                catch for things we haven't setup */}
+            <Route path="*" element={<NoMatch />} />
+          </Route>
+        </Routes>
       </div>
     </>
   );
 }
 
-export default App;
+function Layout() {
+  return (
+    <div>
+      <div className="pb-2">
+        <Header />
+      </div>
+      {/* <Outlet> renders current child route component */}
+      <Outlet />
+    </div>
+  );
+}
+
+function NoMatch() {
+  return (
+    <div>
+      <h2>That page does not exists</h2>
+      <p>
+        <Link to="/">Go to the home page</Link>
+      </p>
+    </div>
+  );
+}

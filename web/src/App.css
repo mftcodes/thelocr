@@ -6,19 +6,20 @@
     --secondary: #285b5e;
 }
 
-#header {
+.header {
     background-color: var(--title);
-    color: white;
 }
 
-.container > .card_bg {
+.row > .container > .card_bg {
     background-color: var(--primary_light);
     color: black;
+    min-height: 18.5rem;
 }
 
-.container > .card_bg__alt {
+.row > .container > .card_bg__alt {
     background-color: var(--secondary);
     color: black;
+    min-height: 18.5rem;
 }
 
 .search {
