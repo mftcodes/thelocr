@@ -11,11 +11,11 @@ import Row from "react-bootstrap/Row";
 export default function Edit() {
   const location = useLocation();
   const resource = location.state;
-  const [county, setCounty] = useState("Make Selection");
+  const [county, setCounty] = useState(resource.County.String);
   const [countySelected, setCountySelected] = useState(false);
   const [category, setCategory] = useState("Make Selection");
   const [categorySelected, setCategorySelected] = useState(false);
-  const [categoryId, setCategoryId] = useState(-1);
+  const [categoryId, setCategoryId] = useState(resource.Category_id);
   const [value, setValue] = useState(),
     onInput = ({ target: { value } }) => setValue(value),
     onFormSubmit = (e) => {
@@ -35,6 +35,7 @@ export default function Edit() {
       <h2 className="text-center search pb-3">New Community Resources</h2>
       <Container>
         <Form>
+          {/* *** RESOURCE NAME/TITLE *** */}
           <Form.Group as={Row} className="mb-3" controlId="formTitle">
             <Form.Label column sm={2}>
               Organization Name
@@ -49,6 +50,7 @@ export default function Edit() {
             </Col>
           </Form.Group>
 
+          {/* *** ISPARENT / IS HEADQUARTERS *** */}
           <Form.Group as={Row} className="mb-3" controlId="formIsParent">
             <Form.Label column sm={2}></Form.Label>{" "}
             {/* Need add to search SProc */}
@@ -65,6 +67,7 @@ export default function Edit() {
             </Col>
           </Form.Group>
 
+          {/* *** RESOURCE DESCRIPTION *** */}
           <Form.Group as={Row} className="mb-3" controlId="formDesc">
             <Form.Label column sm={2}>
               Description
@@ -73,6 +76,7 @@ export default function Edit() {
               <Form.Control
                 as="textarea"
                 placeholder="Description"
+                onChange={onInput}
                 value={resource.Res_desc.String}
               />
               <Form.Text className="text-muted">
@@ -81,6 +85,7 @@ export default function Edit() {
             </Col>
           </Form.Group>
 
+          {/* *** RESOURCE WEBSITE *** */}
           <Form.Group as={Row} className="mb-3" controlId="formUrl">
             <Form.Label column sm={2}>
               Website
@@ -89,6 +94,7 @@ export default function Edit() {
               <Form.Control
                 type="text"
                 placeholder="Webiste"
+                onChange={onInput}
                 value={resource.Url.String}
               />
               <Form.Text className="text-muted">
@@ -96,6 +102,8 @@ export default function Edit() {
               </Form.Text>
             </Col>
           </Form.Group>
+
+          {/* *** RESOURCE CATEGORY *** */}
           <Form.Group as={Col} controlId="formCategory">
             <Form.Label>Category</Form.Label>
             <CategoryDropdown
@@ -108,6 +116,7 @@ export default function Edit() {
             />
           </Form.Group>
 
+          {/* *** RESOURCE ADDRESS LINE 1 *** */}
           <h5 className="pt-4">Organization Address</h5>
           <Form.Group as={Row} className="mb-3" controlId="formLine1">
             <Form.Label column sm={2}>
@@ -116,11 +125,13 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="1234 Main St"
+                onChange={onInput}
                 value={resource.Line_1.String}
               />
             </Col>
           </Form.Group>
 
+          {/* *** RESOURCE ADDRESS LINE 2 *** */}
           <Form.Group as={Row} className="mb-3" controlId="formLine2">
             <Form.Label column sm={2}>
               Address 2
@@ -128,15 +139,17 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="Apt. #, Suite #, etc."
+                onChange={onInput}
                 value={resource.Line_2.String}
               />
             </Col>
           </Form.Group>
 
+          {/* *** RESOURCE COUNTY *** */}
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formCity">
               <Form.Label>City</Form.Label>
-              <Form.Control value={resource.City.String} />
+              <Form.Control value={resource.City.String} onChange={onInput} />
             </Form.Group>
             <Form.Group as={Col} controlId="formCounty">
               <Form.Label>County</Form.Label>
@@ -150,12 +163,15 @@ export default function Edit() {
             </Form.Group>
           </Row>
 
+          {/* *** RESOURCE STATE (disabled) *** */}
           <Row>
             <Form.Group as={Col} controlId="formState">
               <Form.Label>State</Form.Label>
               <Form.Select
-                defaultValue="Choose..."
+                // defaultValue="Choose..."
+                onChange={onInput}
                 value={resource.State.String}
+                disabled
               >
                 <option>Choose...</option>
                 <option value="MI">MI</option>
@@ -163,11 +179,13 @@ export default function Edit() {
               </Form.Select>
             </Form.Group>
 
+            {/* *** RESOURCE ZIP/POSTAL CODE *** */}
             <Form.Group as={Col} controlId="formGridZip">
               <Form.Label>Zip</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="00012"
+                onChange={onInput}
                 value={resource.Postal_code.String}
               />
             </Form.Group>
@@ -179,6 +197,7 @@ export default function Edit() {
             </p>
           </Row>
 
+          {/* *** RESOURCE PHONE 1 or MAIN *** */}
           <h5 className="pt-4">Organization Contacts</h5>
           <Form.Group as={Row} className="mb-3" controlId="formPhone1">
             <Form.Label column sm={2}>
@@ -187,10 +206,13 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
+                onChange={onInput}
                 value={resource.Phone_1.String}
               />
             </Col>
           </Form.Group>
+
+          {/* *** RESOURCE PHONE 2 or ALT *** */}
           <Form.Group as={Row} className="mb-3" controlId="formPhone2">
             <Form.Label column sm={2}>
               Alternative Phone
@@ -198,10 +220,13 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
+                onChange={onInput}
                 value={resource.Phone_2.String}
               />
             </Col>
           </Form.Group>
+
+          {/* *** RESOURCE PHONE TTY *** */}
           <Form.Group as={Row} className="mb-3" controlId="formPhoneTTY">
             <Form.Label column sm={2}>
               TTY Phone
@@ -209,10 +234,13 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
+                onChange={onInput}
                 value={resource.Phone_tty.String}
               />
             </Col>
           </Form.Group>
+
+          {/* *** RESOURCE FAX *** */}
           <Form.Group as={Row} className="mb-3" controlId="formFax">
             <Form.Label column sm={2}>
               Fax
@@ -220,10 +248,13 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
+                onChange={onInput}
                 value={resource.Fax.String}
               />
             </Col>
           </Form.Group>
+
+          {/* *** RESOURCE EMAIL *** */}
           <Form.Group as={Row} className="mb-3" controlId="formEmail">
             <Form.Label column sm={2}>
               Email
@@ -231,11 +262,13 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="contact@email.org"
+                onChange={onInput}
                 value={resource.Email.String}
               />
             </Col>
           </Form.Group>
 
+          {/* *** RESOURCE KEYWORDS *** */}
           <h5 className="pt-4">Search Helpers</h5>
           <Form.Group as={Row} className="mb-3" controlId="formKeyword">
             <Form.Label column sm={2}>
