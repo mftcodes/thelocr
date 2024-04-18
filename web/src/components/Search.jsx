@@ -13,6 +13,11 @@ export default function Search() {
   const [searchPayload, setSearchPayload] = useState({});
   const [resultsReady, setResultsReady] = useState(false);
 
+  function resetSearchResults() {
+    setSearchPayload({});
+    setResultsReady(false);
+  }
+
   return (
     <>
       <h2 className="text-center search">Community Resources Search</h2>
@@ -20,6 +25,7 @@ export default function Search() {
       <CountyDropdown
         label={`County: ${county}   `}
         onChoice={(choice) => {
+          resetSearchResults();
           setCounty(choice);
           setCountySelected(true);
         }}
@@ -27,6 +33,7 @@ export default function Search() {
       <CategoryDropdown
         label={`Category: ${category}   `}
         onChoice={(choice, catId) => {
+          resetSearchResults();
           setCategory(choice);
           setCategorySelected(true);
           setCategoryId(Number.parseInt(catId));
