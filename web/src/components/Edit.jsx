@@ -10,19 +10,12 @@ import Row from "react-bootstrap/Row";
 
 export default function Edit() {
   const location = useLocation();
-  const resource = location.state;
-  const [county, setCounty] = useState(resource.County.String);
+  const originalRes = location.state;
+  const [county, setCounty] = useState(originalRes.County.String);
   const [countySelected, setCountySelected] = useState(false);
   const [category, setCategory] = useState("Make Selection");
   const [categorySelected, setCategorySelected] = useState(false);
-  const [categoryId, setCategoryId] = useState(resource.Category_id);
-  const [value, setValue] = useState(),
-    onInput = ({ target: { value } }) => setValue(value),
-    onFormSubmit = (e) => {
-      e.preventDefault();
-      console.log(value);
-      setValue();
-    };
+  const [categoryId, setCategoryId] = useState(originalRes.Category_id);
   /*
 		res.Created_by,
 		res.Res_title, res.Res_desc, res.Url, isParent, res.Parent_uuid, isStatewide, res.Keyword,
@@ -30,9 +23,39 @@ export default function Edit() {
 		res.Phone_1, res.Phone_2, res.Phone_tty, res.Fax, res.Email,
 		res.Category_id)
     */
+  const [modifiedRes, setModRef] = useState({
+    createdBy: "",
+    title: originalRes.Res_title.String,
+    desc: originalRes.Res_desc.String,
+    url: originalRes.Url.String,
+    // placeholders, will be adding these to the model
+    isParent: "",
+    parentUuid: "",
+    isStatewide: "",
+    keyword: "",
+    line1: originalRes.Line_1.String,
+    line2: originalRes.Line_2.String,
+    city: originalRes.City.String,
+    county: originalRes.County.String,
+    state: originalRes.State.String,
+    postalCode: originalRes.Postal_code.String,
+    phone1: originalRes.Phone_1.String,
+    phone2: originalRes.Phone_2.String,
+    phoneTty: originalRes.Phone_tty.String,
+    f1ax: originalRes.Fax.String,
+    email: originalRes.Email.String,
+  });
+  const updateModRef = (e) => {
+    const { name, value } = e.target;
+    setModRef((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   return (
     <>
-      <h2 className="text-center search pb-3">New Community Resources</h2>
+      <h2 className="text-center search pb-3">Edit Community Resources</h2>
       <Container>
         <Form>
           {/* *** RESOURCE NAME/TITLE *** */}
@@ -44,8 +67,9 @@ export default function Edit() {
               <Form.Control
                 type="text"
                 placeholder="Org. Name"
-                onChange={onInput}
-                value={resource.Res_title.String}
+                value={modifiedRes.title}
+                onChange={updateModRef}
+                name="title"
               />
             </Col>
           </Form.Group>
@@ -53,8 +77,15 @@ export default function Edit() {
           {/* *** ISPARENT / IS HEADQUARTERS *** */}
           <Form.Group as={Row} className="mb-3" controlId="formIsParent">
             <Form.Label column sm={2}></Form.Label>{" "}
-            {/* Need add to search SProc */}
+            {/* *** Need add to search SProc *** */}
             <Col sm={10}>
+              {/* <Form.Check
+                type="checkbox"
+                label="Headquarters office?"
+                value={modifiedRes.isParent}
+                onChange={updateModRef}
+                name="isParent"
+              /> */}
               <Form.Check type="checkbox" label="Headquarters office?" />
               <Form.Text className="text-muted">
                 Is this the organations headquarters/main offices?
@@ -76,8 +107,9 @@ export default function Edit() {
               <Form.Control
                 as="textarea"
                 placeholder="Description"
-                onChange={onInput}
-                value={resource.Res_desc.String}
+                value={modifiedRes.desc}
+                onChange={updateModRef}
+                name="desc"
               />
               <Form.Text className="text-muted">
                 Description of services offered.
@@ -94,8 +126,9 @@ export default function Edit() {
               <Form.Control
                 type="text"
                 placeholder="Webiste"
-                onChange={onInput}
-                value={resource.Url.String}
+                value={modifiedRes.url}
+                onChange={updateModRef}
+                name="url"
               />
               <Form.Text className="text-muted">
                 (e.g. www.CommunityHelpers.org).
@@ -125,8 +158,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="1234 Main St"
-                onChange={onInput}
-                value={resource.Line_1.String}
+                value={modifiedRes.line1}
+                onChange={updateModRef}
+                name="line1"
               />
             </Col>
           </Form.Group>
@@ -139,18 +173,26 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="Apt. #, Suite #, etc."
-                onChange={onInput}
-                value={resource.Line_2.String}
+                value={modifiedRes.line2}
+                onChange={updateModRef}
+                name="line2"
               />
             </Col>
           </Form.Group>
 
-          {/* *** RESOURCE COUNTY *** */}
+          {/* *** RESOURCE CITY *** */}
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formCity">
               <Form.Label>City</Form.Label>
-              <Form.Control value={resource.City.String} onChange={onInput} />
+              <Form.Control
+                placeholder="city"
+                value={modifiedRes.city}
+                onChange={updateModRef}
+                name="city"
+              />
             </Form.Group>
+
+            {/* *** RESOURCE COUNTY *** */}
             <Form.Group as={Col} controlId="formCounty">
               <Form.Label>County</Form.Label>
               <CountyDropdown
@@ -169,8 +211,9 @@ export default function Edit() {
               <Form.Label>State</Form.Label>
               <Form.Select
                 // defaultValue="Choose..."
-                onChange={onInput}
-                value={resource.State.String}
+                value={modifiedRes.state}
+                onChange={updateModRef}
+                name="state"
                 disabled
               >
                 <option>Choose...</option>
@@ -185,8 +228,9 @@ export default function Edit() {
               <Form.Control
                 type="text"
                 placeholder="00012"
-                onChange={onInput}
-                value={resource.Postal_code.String}
+                value={modifiedRes.postalCode}
+                onChange={updateModRef}
+                name="postalCode"
               />
             </Form.Group>
             <p>
@@ -206,8 +250,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
-                onChange={onInput}
-                value={resource.Phone_1.String}
+                value={modifiedRes.phone1}
+                onChange={updateModRef}
+                name="phone1"
               />
             </Col>
           </Form.Group>
@@ -220,8 +265,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
-                onChange={onInput}
-                value={resource.Phone_2.String}
+                value={modifiedRes.phone2}
+                onChange={updateModRef}
+                name="phone2"
               />
             </Col>
           </Form.Group>
@@ -234,8 +280,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
-                onChange={onInput}
-                value={resource.Phone_tty.String}
+                value={modifiedRes.phoneTty}
+                onChange={updateModRef}
+                name="phoneTty"
               />
             </Col>
           </Form.Group>
@@ -248,8 +295,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
-                onChange={onInput}
-                value={resource.Fax.String}
+                value={modifiedRes.fax}
+                onChange={updateModRef}
+                name="fax"
               />
             </Col>
           </Form.Group>
@@ -262,8 +310,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="contact@email.org"
-                onChange={onInput}
-                value={resource.Email.String}
+                value={modifiedRes.email}
+                onChange={updateModRef}
+                name="email"
               />
             </Col>
           </Form.Group>
@@ -275,6 +324,12 @@ export default function Edit() {
               Keywords (comma separated)
             </Form.Label>
             <Col sm={10}>
+              {/* <Form.Control 
+                type="text" 
+                placeholder="Keywords" 
+                value={modifiedRes.keyword} 
+                onChange={updateModRef}
+              /> */}
               <Form.Control type="text" placeholder="Keywords" />
             </Col>
             <Form.Text className="text-muted">
@@ -300,8 +355,4 @@ export default function Edit() {
       </Container>
     </>
   );
-
-  function getTheGoods() {
-    const title = getELementById("formTitle");
-  }
 }

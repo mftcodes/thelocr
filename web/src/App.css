@@ -2,8 +2,10 @@
     --title: #1d243b;
     --background: #bcc0d3;
     --primary_dark: #434d75;
+    --primary_dark_hover: #67729c;
     --primary_light: #bcc0d3;
     --secondary: #285b5e;
+    --secondary_hover: #558e91;
 }
 
 .header {
@@ -35,8 +37,18 @@
     color: white;
 }
 
+.btn.btn_bowen:hover {
+    background-color: var(--primary_dark_hover);
+    color: white;
+}
+
 .btn.btn_bowen__alt {
     background-color: var(--secondary);
+    color: white;
+}
+
+.btn.btn_bowen__alt:hover {
+    background-color: var(--secondary_hover);
     color: white;
 }
 
