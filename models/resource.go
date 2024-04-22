@@ -71,3 +71,9 @@ type ResourceSearchBase struct {
 	State        string `json: "state"`
 	Category_id  int    `json: "cat_id"`
 }
+
+type ResourceEdit struct {
+	Address  Address
+	Contact  Contact
+	Resource Resource
+}

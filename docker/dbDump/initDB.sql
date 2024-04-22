@@ -154,8 +154,8 @@ DROP TABLE IF EXISTS `con_history`;
 CREATE TABLE `con_history` (
   `con_hist_id` int NOT NULL AUTO_INCREMENT,
   `con_uuid` binary(16) NOT NULL,
-  `phone_prime` varchar(25) DEFAULT NULL,
-  `phone_second` varchar(25) DEFAULT NULL,
+  `phone_1` varchar(25) DEFAULT NULL,
+  `phone_2` varchar(25) DEFAULT NULL,
   `phone_tty` varchar(25) DEFAULT NULL,
   `fax` varchar(25) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,

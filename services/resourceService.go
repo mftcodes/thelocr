@@ -26,3 +26,11 @@ func (rs *ResourceService) SearchBase(terms models.ResourceSearchBase) ([]models
 	}
 	return result, nil
 }
+
+func (rs *ResourceService) Update(res models.ResourceEdit) (sql.Result, error) {
+	result, err := resourceRepository.Update(res)
+	if err != nil {
+		return result, err
+	}
+	return result, nil
+}

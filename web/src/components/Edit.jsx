@@ -25,6 +25,7 @@ export default function Edit() {
     */
   const [modifiedRes, setModRef] = useState({
     createdBy: "",
+    resUuid: originalRes.Res_uuid,
     title: originalRes.Res_title.String,
     desc: originalRes.Res_desc.String,
     url: originalRes.Url.String,
@@ -33,12 +34,14 @@ export default function Edit() {
     parentUuid: "",
     isStatewide: "",
     keyword: "",
+    addrUuid: originalRes.Addr_uuid,
     line1: originalRes.Line_1.String,
     line2: originalRes.Line_2.String,
     city: originalRes.City.String,
     county: originalRes.County.String,
     state: originalRes.State.String,
     postalCode: originalRes.Postal_code.String,
+    conUuid: originalRes.Con_uuid,
     phone1: originalRes.Phone_1.String,
     phone2: originalRes.Phone_2.String,
     phoneTty: originalRes.Phone_tty.String,

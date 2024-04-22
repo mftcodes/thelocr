@@ -45,3 +45,21 @@ func (rc *ResourceController) Search(c *gin.Context) {
 
 	c.IndentedJSON(http.StatusOK, result)
 }
+
+func (rc *ResourceController) Update(c *gin.Context) {
+	var res models.ResourceEdit
+	if err := c.ShouldBindJSON(&res); err != nil {
+		// Need to get rid of the error sending back, need to log send back generic message, or 500?
+		c.JSON(http.StatusBadRequest, gin.H{"A error": err.Error()})
+		return
+	}
+
+	result, err := resourceService.Update(res)
+	if err != nil {
+		// Need to get rid of the error sending back, need to log send back generic message, or 500?
+		c.JSON(http.StatusBadRequest, gin.H{"B error": err.Error()})
+		return
+	}
+
+	c.IndentedJSON(http.StatusOK, result)
+}
