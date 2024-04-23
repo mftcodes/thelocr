@@ -403,11 +403,9 @@ export default function Edit() {
             </Form.Text>
           </Form.Group>
 
-          {countySelected && categorySelected && (
-            <Button type="bowen" doClick={() => update()}>
-              Submit
-            </Button>
-          )}
+          <Button type="bowen" doClick={() => update()}>
+            Submit
+          </Button>
         </Form>
       </Container>
     </>
