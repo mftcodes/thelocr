@@ -11,6 +11,7 @@ import Row from "react-bootstrap/Row";
 export default function Edit() {
   const location = useLocation();
   const originalRes = location.state;
+  const uri = "http://localhost:8080/api/resource/update";
   const [county, setCounty] = useState(originalRes.County.String);
   const [countySelected, setCountySelected] = useState(false);
   const [category, setCategory] = useState("Make Selection");
@@ -25,28 +26,28 @@ export default function Edit() {
     */
   const [modifiedRes, setModRef] = useState({
     createdBy: "",
-    resUuid: originalRes.Res_uuid,
-    title: originalRes.Res_title.String,
-    desc: originalRes.Res_desc.String,
-    url: originalRes.Url.String,
+    Res_uuid: originalRes.Res_uuid,
+    Res_title: originalRes.Res_title.String,
+    Res_desc: originalRes.Res_desc.String,
+    Url: originalRes.Url.String,
     // placeholders, will be adding these to the model
     isParent: "",
     parentUuid: "",
     isStatewide: "",
     keyword: "",
-    addrUuid: originalRes.Addr_uuid,
-    line1: originalRes.Line_1.String,
-    line2: originalRes.Line_2.String,
-    city: originalRes.City.String,
-    county: originalRes.County.String,
-    state: originalRes.State.String,
-    postalCode: originalRes.Postal_code.String,
-    conUuid: originalRes.Con_uuid,
-    phone1: originalRes.Phone_1.String,
-    phone2: originalRes.Phone_2.String,
-    phoneTty: originalRes.Phone_tty.String,
-    f1ax: originalRes.Fax.String,
-    email: originalRes.Email.String,
+    Addr_uuid: originalRes.Addr_uuid,
+    Line_1: originalRes.Line_1.String,
+    Line_2: originalRes.Line_2.String,
+    City: originalRes.City.String,
+    County: originalRes.County.String,
+    State: originalRes.State.String,
+    Postal_code: originalRes.Postal_code.String,
+    Con_uuid: originalRes.Con_uuid,
+    Phone_1: originalRes.Phone_1.String,
+    Phone_2: originalRes.Phone_2.String,
+    Phone_tty: originalRes.Phone_tty.String,
+    Fax: originalRes.Fax.String,
+    Email: originalRes.Email.String,
   });
   const updateModRef = (e) => {
     const { name, value } = e.target;
@@ -55,6 +56,75 @@ export default function Edit() {
       [name]: value,
     }));
   };
+
+  async function update() {
+    const payload = setPayload();
+    try {
+      const [resp] = await Promise.all([
+        (
+          await fetch(uri, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          })
+        ).json(),
+      ]);
+      if (!resp) {
+        console.log("Need to log this error, or do something.");
+      } else if (resp.length > 0) {
+        setResources(resp);
+      } else {
+        console.log(resp);
+        console.log("Need to log this error, too.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function setPayload() {
+    return {
+      Address: {
+        Addr_uuid: modifiedRes.Addr_uuid,
+        Line_1: toSqlNullStr(modifiedRes.Line_1),
+        Line_2: toSqlNullStr(modifiedRes.Line_2),
+        City: toSqlNullStr(modifiedRes.City),
+        County: toSqlNullStr(modifiedRes.County),
+        State: toSqlNullStr(modifiedRes.State),
+        Postal_code: toSqlNullStr(modifiedRes.Postal_code),
+      },
+      Contact: {
+        Con_uuid: modifiedRes.Con_uuid,
+        Phone_1: toSqlNullStr(modifiedRes.Phone_1),
+        Phone_2: toSqlNullStr(modifiedRes.Phone_2),
+        Phone_tty: toSqlNullStr(modifiedRes.Phone_tty),
+        Fax: toSqlNullStr(modifiedRes.Fax),
+        Email: toSqlNullStr(modifiedRes.Email),
+      },
+      Resource: {
+        Res_uuid: modifiedRes.Res_uuid,
+        Res_title: toSqlNullStr(modifiedRes.Res_title),
+        Res_desc: toSqlNullStr(modifiedRes.Res_desc),
+        Url: toSqlNullStr(modifiedRes.Url),
+        // placeholders, will be adding these to the model
+        isParent: "",
+        parentUuid: "",
+        isStatewide: "",
+        keyword: toSqlNullStr(""),
+      },
+    };
+  }
+
+  function toSqlNullStr(s) {
+    if (s == "") {
+      return { String: "", Valid: false };
+    } else {
+      return { String: s, Valid: true };
+    }
+  }
 
   return (
     <>
@@ -70,9 +140,9 @@ export default function Edit() {
               <Form.Control
                 type="text"
                 placeholder="Org. Name"
-                value={modifiedRes.title}
+                value={modifiedRes.Res_title}
                 onChange={updateModRef}
-                name="title"
+                name="Res_title"
               />
             </Col>
           </Form.Group>
@@ -110,9 +180,9 @@ export default function Edit() {
               <Form.Control
                 as="textarea"
                 placeholder="Description"
-                value={modifiedRes.desc}
+                value={modifiedRes.Res_desc}
                 onChange={updateModRef}
-                name="desc"
+                name="Res_desc"
               />
               <Form.Text className="text-muted">
                 Description of services offered.
@@ -129,9 +199,9 @@ export default function Edit() {
               <Form.Control
                 type="text"
                 placeholder="Webiste"
-                value={modifiedRes.url}
+                value={modifiedRes.Url}
                 onChange={updateModRef}
-                name="url"
+                name="Url"
               />
               <Form.Text className="text-muted">
                 (e.g. www.CommunityHelpers.org).
@@ -161,9 +231,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="1234 Main St"
-                value={modifiedRes.line1}
+                value={modifiedRes.Line_1}
                 onChange={updateModRef}
-                name="line1"
+                name="Line_1"
               />
             </Col>
           </Form.Group>
@@ -176,9 +246,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="Apt. #, Suite #, etc."
-                value={modifiedRes.line2}
+                value={modifiedRes.Line_2}
                 onChange={updateModRef}
-                name="line2"
+                name="Line_2"
               />
             </Col>
           </Form.Group>
@@ -188,10 +258,10 @@ export default function Edit() {
             <Form.Group as={Col} controlId="formCity">
               <Form.Label>City</Form.Label>
               <Form.Control
-                placeholder="city"
-                value={modifiedRes.city}
+                placeholder="City"
+                value={modifiedRes.City}
                 onChange={updateModRef}
-                name="city"
+                name="City"
               />
             </Form.Group>
 
@@ -214,9 +284,9 @@ export default function Edit() {
               <Form.Label>State</Form.Label>
               <Form.Select
                 // defaultValue="Choose..."
-                value={modifiedRes.state}
+                value={modifiedRes.State}
                 onChange={updateModRef}
-                name="state"
+                name="State"
                 disabled
               >
                 <option>Choose...</option>
@@ -231,14 +301,14 @@ export default function Edit() {
               <Form.Control
                 type="text"
                 placeholder="00012"
-                value={modifiedRes.postalCode}
+                value={modifiedRes.Postal_code}
                 onChange={updateModRef}
-                name="postalCode"
+                name="Postal_code"
               />
             </Form.Group>
             <p>
               <em>
-                &nbsp;&nbsp;* Will need to do a search for county to verify, or
+                &nbsp;&nbsp;* Will need to do a search for County to verify, or
                 trust the users with dropdown?
               </em>
             </p>
@@ -253,9 +323,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
-                value={modifiedRes.phone1}
+                value={modifiedRes.Phone_1}
                 onChange={updateModRef}
-                name="phone1"
+                name="Phone_1"
               />
             </Col>
           </Form.Group>
@@ -268,9 +338,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
-                value={modifiedRes.phone2}
+                value={modifiedRes.Phone_2}
                 onChange={updateModRef}
-                name="phone2"
+                name="Phone_2"
               />
             </Col>
           </Form.Group>
@@ -283,9 +353,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
-                value={modifiedRes.phoneTty}
+                value={modifiedRes.Phone_tty}
                 onChange={updateModRef}
-                name="phoneTty"
+                name="Phone_tty"
               />
             </Col>
           </Form.Group>
@@ -298,9 +368,9 @@ export default function Edit() {
             <Col sm={10}>
               <Form.Control
                 placeholder="(888) 555 1234"
-                value={modifiedRes.fax}
+                value={modifiedRes.Fax}
                 onChange={updateModRef}
-                name="fax"
+                name="Fax"
               />
             </Col>
           </Form.Group>
@@ -312,10 +382,10 @@ export default function Edit() {
             </Form.Label>
             <Col sm={10}>
               <Form.Control
-                placeholder="contact@email.org"
-                value={modifiedRes.email}
+                placeholder="contact@Email.org"
+                value={modifiedRes.Email}
                 onChange={updateModRef}
-                name="email"
+                name="Email"
               />
             </Col>
           </Form.Group>
@@ -342,15 +412,7 @@ export default function Edit() {
           </Form.Group>
 
           {countySelected && categorySelected && (
-            <Button
-              type="bowen"
-              doClick={() => {
-                const payload = {
-                  Title: formTitle,
-                  Category_id: categoryId,
-                };
-              }}
-            >
+            <Button type="bowen" doClick={() => update()}>
               Submit
             </Button>
           )}
