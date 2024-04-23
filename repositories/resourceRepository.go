@@ -10,8 +10,6 @@ import (
 
 type ResourceRepository struct{}
 
-const Service string = "update service"
-
 func (rr *ResourceRepository) Create(res models.ResourceInsert) (sql.Result, error) {
 	isParent := boolToBit(res.Is_parent)
 	isStatewide := boolToBit(res.Is_statewide)
@@ -58,33 +56,13 @@ func (rr *ResourceRepository) SearchBase(terms models.ResourceSearchBase) ([]mod
 
 /* SProc Structure
  *	CALL minuchin.sp_updateFullResource(
- * 	:addrUuid,
- *	:line1,
- *	:line2,
- *	:line3,
- *	:city,
- *	:county,
- *	:state,
- *	:postalCode,
- *	:conUuid,
- *	:phone1,
- *	:phone2,
- *	:phoneTty,
- *	:fax,
- *	:email,
- *	:resUuid,
- *	:resTitle,
- *	:resDesc,
- *	:url,
- *	:isParent,
- *	:parentUuid,
- *	:isStatewide,
- *	:isNationwide,
- *	:keyword,
- *	:modified,
- *	:modifiedBy);
+ * 	:addrUuid, :line1, :line2, :line3, :city, :county, :state, :postalCode,
+ *	:conUuid, :phone1, :phone2, :phoneTty, :fax, :email,
+ *	:resUuid, :resTitle, :resDesc, :url, :isParent, :parentUuid, :isStatewide, :isNationwide, :keyword,
+ *	:modified, :modifiedBy);
  */
 func (rr *ResourceRepository) Update(res models.ResourceEdit) (sql.Result, error) {
+	const Service string = "update service"
 	sql := fmt.Sprintf(`
 	CALL minuchin.sp_updateFullResource(
 		'%s', %s, %s, %s, %s, %s, %s, %s, 

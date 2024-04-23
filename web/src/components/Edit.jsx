@@ -17,13 +17,6 @@ export default function Edit() {
   const [category, setCategory] = useState("Make Selection");
   const [categorySelected, setCategorySelected] = useState(false);
   const [categoryId, setCategoryId] = useState(originalRes.Category_id);
-  /*
-		res.Created_by,
-		res.Res_title, res.Res_desc, res.Url, isParent, res.Parent_uuid, isStatewide, res.Keyword,
-		res.Line_1, res.Line_2, res.City, res.County, res.State, res.Postal_code,
-		res.Phone_1, res.Phone_2, res.Phone_tty, res.Fax, res.Email,
-		res.Category_id)
-    */
   const [modifiedRes, setModRef] = useState({
     createdBy: "",
     Res_uuid: originalRes.Res_uuid,
@@ -109,7 +102,6 @@ export default function Edit() {
         Res_title: toSqlNullStr(modifiedRes.Res_title),
         Res_desc: toSqlNullStr(modifiedRes.Res_desc),
         Url: toSqlNullStr(modifiedRes.Url),
-        // placeholders, will be adding these to the model
         isParent: "",
         parentUuid: "",
         isStatewide: "",

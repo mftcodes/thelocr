@@ -13,6 +13,12 @@ type ResourceController struct{}
 
 var resourceService = new(services.ResourceService)
 
+/* *** TODO NOTES ***
+ * Need to refactor errors to logs, and consider
+ * having errors going back to the front-end (or client?)
+ * to be more generic, 500 perhsp?
+ */
+
 func (rc *ResourceController) Create(c *gin.Context) {
 	var resInput models.ResourceInsert
 	if err := c.ShouldBindJSON(&resInput); err != nil {
@@ -21,7 +27,6 @@ func (rc *ResourceController) Create(c *gin.Context) {
 	}
 	_, err := resourceService.Create(resInput)
 	if err != nil {
-		// Need to get rid of the error sending back, need to log send back generic message, or 500?
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -31,14 +36,12 @@ func (rc *ResourceController) Create(c *gin.Context) {
 func (rc *ResourceController) Search(c *gin.Context) {
 	var terms models.ResourceSearchBase
 	if err := c.ShouldBindJSON(&terms); err != nil {
-		// Need to get rid of the error sending back, need to log send back generic message, or 500?
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	result, err := resourceService.SearchBase(terms)
 	if err != nil {
-		// Need to get rid of the error sending back, need to log send back generic message, or 500?
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -49,14 +52,12 @@ func (rc *ResourceController) Search(c *gin.Context) {
 func (rc *ResourceController) Update(c *gin.Context) {
 	var res models.ResourceEdit
 	if err := c.ShouldBindJSON(&res); err != nil {
-		// Need to get rid of the error sending back, need to log send back generic message, or 500?
 		c.JSON(http.StatusBadRequest, gin.H{"A error": err.Error()})
 		return
 	}
 
 	result, err := resourceService.Update(res)
 	if err != nil {
-		// Need to get rid of the error sending back, need to log send back generic message, or 500?
 		c.JSON(http.StatusBadRequest, gin.H{"B error": err.Error()})
 		return
 	}
