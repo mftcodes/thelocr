@@ -154,8 +154,8 @@ DROP TABLE IF EXISTS `con_history`;
 CREATE TABLE `con_history` (
   `con_hist_id` int NOT NULL AUTO_INCREMENT,
   `con_uuid` binary(16) NOT NULL,
-  `phone_prime` varchar(25) DEFAULT NULL,
-  `phone_second` varchar(25) DEFAULT NULL,
+  `phone_1` varchar(25) DEFAULT NULL,
+  `phone_2` varchar(25) DEFAULT NULL,
   `phone_tty` varchar(25) DEFAULT NULL,
   `fax` varchar(25) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -391,4 +391,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-15 17:59:54
+-- Dump completed on 2024-04-23 17:25:14

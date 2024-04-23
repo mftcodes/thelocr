@@ -29,6 +29,7 @@ func InitRouter() *gin.Engine {
 		{
 			resource.PUT("", resourceController.Create)
 			resource.POST("/search", resourceController.Search)
+			resource.POST("/update", resourceController.Update)
 		}
 		category := api.Group("/category")
 		{
