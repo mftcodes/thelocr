@@ -18,29 +18,34 @@ For Windows OS we also recommend installing [Docker Desktop](https://www.docker.
 
 NOTE: You must have the API running in order for the front end to function.
 
-## Database Setup: 
-### Setup MySQL in Docker
-   1. `cd` into `docker` directory and run `docker compose up`
-   2. once container is spun up, connect to MySQL*:
-      1. HOST: `localhost:3308`
-      2. DB: `minuchin`
-      3. Username: `root`
-      4. Password: _obtain from docker yaml file_
-   3. run the script: `docker/dbDump/initDB.sql`
-      1. This will set up the db and table structures, as well as stub in a small data set
-      2. A longer script for seed the db with a larger data set is currently being worked on and will be added to the repo when ready
+## Database Setup:
 
-#### Connect to MySql using DBeaver: 
-   1. install Dbeaver if you haven't already
-   2. connect to the MySql Instance: 
-     1. HOST: `localhost:3308`
-     2. DB: `minuchin`
-     3. Username: `root`
-     4. Password: _obtain from docker yaml file_
-   3. Under `connection settings > driver properties >` set `allowPublicKeyRetrieval` to `TRUE` 
-   4. Open a query window for the db and run the initDB.sql script
+### Setup MySQL in Docker
+
+1.  `cd` into `docker` directory and run `docker compose up`
+2.  once container is spun up, connect to MySQL\*:
+    1. HOST: `localhost:3308`
+    2. DB: `minuchin`
+    3. Username: `root`
+    4. Password: _obtain from docker yaml file_
+3.  run the script: `docker/dbDump/initDB.sql`
+    1. This will set up the db and table structures, as well as stub in a small data set
+    2. A longer script for seed the db with a larger data set is currently being worked on and will be added to the repo when ready
+4.  run the script: `docker/dbDump/initSProcs.sql`, which adds store procedures for `insert`, `search`, and `update`
+
+#### Connect to MySql using DBeaver:
+
+1.  install Dbeaver if you haven't already
+2.  connect to the MySql Instance:
+3.  HOST: `localhost:3308`
+4.  DB: `minuchin`
+5.  Username: `root`
+6.  Password: _obtain from docker yaml file_
+7.  Under `connection settings > driver properties >` set `allowPublicKeyRetrieval` to `TRUE`
+8.  Open a query window for the db and run the initDB.sql script
 
 ## Go Back End API, Option 1
+
 1. initialize the project from the root directory
    ```
    go mod init bowen
@@ -91,15 +96,6 @@ NOTE: You must have the API running in order for the front end to function.
 4. Hit the API with Insomnia or Postman
 5. This will also serve up the API for the front end
 6. [Digital Ocean](https://www.digitalocean.com/community/tutorials/debugging-go-code-with-visual-studio-code) has a good article about debugging go that may be helpful here
-
-
-
-### Running the vanilla HTML/CSS/JS Front End Web Server (VSCodium specific, and likely to be deleted soon)
-
-1. Add the `Live Server` extension from `ritwickdey` found [here](https://open-vsx.org/extension/ritwickdey/LiveServer)
-2. Open the file `./frontend/index.html`
-3. Click `Go Live` at the bottom of the VSC window and web server should launch
-4. If you run into problems here, read the `Live Server` docs
 
 ### Running ReactJS front end
 
