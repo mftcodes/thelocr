@@ -73,7 +73,7 @@ function searchByCategory(isStateWide, county, state, cat_id) {
     "Is_statewide": isStateWide,
     "County": county,
     "State": state,
-    "Category_id": cat_id
+    "Cat_id": cat_id
   };
 
   (async () => {

@@ -11,6 +11,7 @@ import (
 var addressController = new(controllers.AddressController)
 var resourceController = new(controllers.ResourceController)
 var categoryController = new(controllers.CategoryController)
+var userController = new(controllers.UserController)
 
 func InitRouter() *gin.Engine {
 	r := gin.Default()
@@ -34,6 +35,12 @@ func InitRouter() *gin.Engine {
 		category := api.Group("/category")
 		{
 			category.GET("", categoryController.List)
+		}
+		user := api.Group("/user")
+		{
+			user.GET(":id", userController.GetById)
+			user.PUT("/create", userController.Create)
+			user.POST("/login", userController.Login)
 		}
 	}
 

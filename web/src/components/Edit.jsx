@@ -16,7 +16,7 @@ export default function Edit() {
   const [countySelected, setCountySelected] = useState(false);
   const [category, setCategory] = useState("Make Selection");
   const [categorySelected, setCategorySelected] = useState(false);
-  const [categoryId, setCategoryId] = useState(originalRes.Category_id);
+  const [categoryId, setCategoryId] = useState(originalRes.Cat_id);
   const [modifiedRes, setModRef] = useState({
     createdBy: "",
     Res_uuid: originalRes.Res_uuid,
