@@ -81,13 +81,13 @@ NOTE: You must have the API running in order for the front end to function.
 1. Need to create the `launch.json` file under the `Run and Debug` tab
 2. Use the following configuration:
    ```
-       "configurations": [
+   "configurations": [
        {
            "name": "API ONLY",
            "type": "go",
            "request": "launch",
            "mode": "auto",
-           "program": "{YOUR_PATH_TO}/bowen.go"
+           "program": "${workspaceFolder}/bowen.go"
        }
    ]
    ```
