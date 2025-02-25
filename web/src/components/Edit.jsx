@@ -67,11 +67,9 @@ export default function Edit() {
       ]);
       if (!resp) {
         console.log("Need to log this error, or do something.");
-      } else if (resp.length > 0) {
-        setResources(resp);
+        return;
       } else {
-        console.log(resp);
-        console.log("Need to log this error, too.");
+        // Success, need to go back to detail and refresh with saved data
       }
     } catch (error) {
       console.log(error);
