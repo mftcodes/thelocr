@@ -16,7 +16,7 @@ export default function Edit() {
   const [countySelected, setCountySelected] = useState(false);
   const [category, setCategory] = useState("Make Selection");
   const [categorySelected, setCategorySelected] = useState(false);
-  const [categoryId, setCategoryId] = useState(originalRes.Category_id);
+  const [categoryId, setCategoryId] = useState(originalRes.Cat_id);
   const [modifiedRes, setModRef] = useState({
     createdBy: "",
     Res_uuid: originalRes.Res_uuid,
@@ -67,11 +67,9 @@ export default function Edit() {
       ]);
       if (!resp) {
         console.log("Need to log this error, or do something.");
-      } else if (resp.length > 0) {
-        setResources(resp);
+        return;
       } else {
-        console.log(resp);
-        console.log("Need to log this error, too.");
+        // Success, need to go back to detail and refresh with saved data
       }
     } catch (error) {
       console.log(error);

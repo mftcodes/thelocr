@@ -1,26 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
+import counties from "../assets/mi_counties.json"
 
 const CountyDropdown = ({ label, onChoice }) => {
-  const uri = "https://data.michigan.gov/resource/v9jc-jc8d.json";
-  const [counties, setCounties] = useState([]);
-  useEffect(() => {
-    fetch(uri, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "X-App-Token": "INSERT-API-TOKEN",
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setCounties(data);
-      });
-  }, []);
-
   // The forwardRef is important!!
   // Dropdown needs access to the DOM node in order to position the Menu
   const Toggle = React.forwardRef(({ children, onClick }, ref) => (

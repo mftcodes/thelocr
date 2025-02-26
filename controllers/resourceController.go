@@ -16,7 +16,7 @@ var resourceService = new(services.ResourceService)
 /* *** TODO NOTES ***
  * Need to refactor errors to logs, and consider
  * having errors going back to the front-end (or client?)
- * to be more generic, 500 perhsp?
+ * to be more generic, 500 perhaps?
  */
 
 func (rc *ResourceController) Create(c *gin.Context) {

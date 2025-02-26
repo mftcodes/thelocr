@@ -48,7 +48,7 @@ export default function Search() {
                 Is_statewide: true,
                 County: county,
                 State: "MI",
-                Category_id: categoryId,
+                Cat_id: categoryId,
               };
               setSearchPayload(payload);
               setResultsReady(true);

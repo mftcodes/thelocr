@@ -1,8 +1,9 @@
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Header } from "./components/Header";
-import Search from "./components/Search";
-import Edit from "./components/Edit";
+import CreateUser from "./components/CreateUser";
 import Detail from "./components/Detail";
+import Edit from "./components/Edit";
+import Search from "./components/Search";
 import "./App.css";
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
             <Route index element={<Search />} />
             <Route path="detail" element={<Detail />} />
             <Route path="edit" element={<Edit />} />
+            <Route path="createuser" element={<CreateUser />} />
 
             {/* path="*"" matches anything, so acts as a 
                 catch for things we haven't setup */}
