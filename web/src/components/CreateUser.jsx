@@ -8,7 +8,7 @@ import Row from "react-bootstrap/Row";
 export default function CreateUser() {
   const uri = "http://localhost:8080/api/user/create";
   const [user, setUser] = useState({
-    Email: "",
+    User_email: "",
     Username: "",
     First_name: "",
     Last_name: "",
@@ -23,7 +23,6 @@ export default function CreateUser() {
   };
 
   async function createNewUser() {
-    const payload = setPayload();
     try {
       const [resp] = await Promise.all([
         (
@@ -45,30 +44,6 @@ export default function CreateUser() {
       }
     } catch (error) {
       console.log(error);
-    }
-  }
-
-  function setPayload() {
-    return {
-    //   User: {
-        Email: user.Email.String,
-        Username: user.Username.String,
-        First_name: user.First_name.String,
-        Last_name: user.Last_name.String,
-        Password: user.Password.String,
-        // Can_edit: user.Can_Edit),
-        // Created: user.Created),
-        // Modified: user.Modified),
-        // Modifeid_by: user.Modified_by)
-    //   }
-    };
-  }
-
-  function toSqlNullStr(s) {
-    if (s == "") {
-      return { String: "", Valid: false };
-    } else {
-      return { String: s, Valid: true };
     }
   }
 
@@ -114,11 +89,11 @@ export default function CreateUser() {
             </Form.Label>
             <Col sm={10}>
               <Form.Control
-                type="text"
+                type="email"
                 placeholder="email@domain.net"
-                value={user.Email.String}
+                value={user.User_email.String}
                 onChange={updateUser}
-                name="Email"
+                name="User_email"
               />
             </Col>
           </Form.Group>
@@ -151,7 +126,7 @@ export default function CreateUser() {
                 name="Password"
               />
               <Form.Text className="text-muted">
-                Description of services offered.
+                Minimum of 12 characters, must contain one number and a special character.
               </Form.Text>
             </Col>
           </Form.Group>
