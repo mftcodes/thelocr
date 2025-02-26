@@ -11,10 +11,6 @@ import (
 
 type UserController struct{}
 
-// type Uri struct {
-// 	Id string `uri:"id"`
-// }
-
 var userService = new(services.UserService)
 
 func (uc *UserController) GetById(c *gin.Context) {

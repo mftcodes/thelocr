@@ -70,8 +70,6 @@ func (ur *UserRepository) Login(terms models.UserLogin) (models.User, error) {
 }
 
 func (ur *UserRepository) Create(terms models.UserCreate) (sql.Result, error) {
-	// var user models.User
-
 	hpass, _ := bcrypt.GenerateFromPassword([]byte(terms.Password), 8)
 
 	sql := fmt.Sprintf(`
