@@ -84,25 +84,6 @@ func (ur *UserRepository) Create(terms models.UserCreate) (sql.Result, error) {
 	if err != nil {
 		return result, err
 	}
-	// else {
-	// 	sql = fmt.Sprintf(`
-	// 		SELECT *
-	// 		FROM user
-	// 		WHERE username = '%s';
-	// 	`, terms.Username)
-	// 	rows, err := config.DBConn.Query(sql)
-	// 	if err != nil {
-	// 		return result, err
-	// 	}
-	// 	defer rows.Close()
-
-	// 	for rows.Next() {
-	// 		err := rows.Scan(&user.User_id, &user.User_uuid, &user.Email, &user.Username, &user.First_name, &user.Last_name, &user.Password, &user.Can_edit, &user.Created, &user.Modified, &user.Modified_by)
-	// 		if err != nil {
-	// 			return user, err
-	// 		}
-	// 	}
-	// }
 
 	return result, nil
 }
