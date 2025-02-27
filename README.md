@@ -2,7 +2,7 @@
 
 ## Description
 
-API to deliver community resource information.
+This project is working toward a community driven and maintained Community Resource Reposetory for all types of services.
 
 I worked for over 10 years in Community Mental Health and it was always a struggle to obtain, and maintain, an up-to-date list of community based resources. Many clients required far more than I was able to give them, and many of those needs are met through community based programs, services, and connections. There simply is not a one-stop place to see what all is out there to be able to provide the clients with the information they need. We do have 211 and it is a great service; however, one of the biggest complaints I heard about 211 was how quickly some of their resources were out of date. Additionally, outside of Michigan (and probably some other states) the only way to get connected is to call 211 and get the support you need. This is a great service, and one I have no desire to replace. However, sometimes, it is just simpler to grab your phone, or get on a library computer, and find what you need without having to be social.
 
