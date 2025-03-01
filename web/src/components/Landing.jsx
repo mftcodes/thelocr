@@ -35,7 +35,7 @@ export default function Landing() {
         </p>
         <p>
           It is our hope that this becomes the base building block to begin
-          addressing these problem, and is but a small piece of a much larger
+          addressing these problem, and a small beginning of a much larger
           road map.
         </p>
         <Button type="bowen" doClick={() => routeChange()}>
