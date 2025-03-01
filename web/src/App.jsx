@@ -3,6 +3,7 @@ import { Header } from "./components/Header";
 import CreateUser from "./components/CreateUser";
 import Detail from "./components/Detail";
 import Edit from "./components/Edit";
+import Landing from "./components/Landing";
 import Search from "./components/Search";
 import "./App.css";
 
@@ -12,7 +13,8 @@ export default function App() {
       <div>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Search />} />
+            <Route index element={<Landing />} />
+            <Route path="search" element={<Search />} />
             <Route path="detail" element={<Detail />} />
             <Route path="edit" element={<Edit />} />
             <Route path="createuser" element={<CreateUser />} />
