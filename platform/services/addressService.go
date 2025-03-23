@@ -1,8 +1,8 @@
 package services
 
 import (
-	"bowen/models"
-	"bowen/repositories"
+	"bowen/platform/models"
+	"bowen/platform/repositories"
 )
 
 type AddressService struct{}

@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"bowen/config"
-	"bowen/models"
+	"bowen/platform/config"
+	"bowen/platform/models"
 )
 
 type CategoryRepository struct {

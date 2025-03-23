@@ -3,8 +3,8 @@ package repositories
 import (
 	"fmt"
 
-	"bowen/config"
-	"bowen/models"
+	"bowen/platform/config"
+	"bowen/platform/models"
 )
 
 type AddressRepository struct {
