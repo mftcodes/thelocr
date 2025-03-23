@@ -8,8 +8,31 @@
     --secondary_hover: #558e91;
 }
 
-.header {
+#root {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#footer {
     background-color: var(--title);
+    height: 5rem;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    color: white;
+    padding: 2em 0;
+    text-align: center;
+}
+
+#header {
+    background-color: var(--title);
+}
+
+#app > .container {
+    padding-bottom: 2em;
+    margin-bottom: 5em;
 }
 
 .row > .container > .card_bg {
@@ -69,13 +92,4 @@
     bottom: 0;
     left: 0;
     right: 0;
-  }
-
-.footie {
-    background-color: var(--title);
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    color: white;
-    padding: 2em 0 1em 0;
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "./Button";
+import Button from "../components/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/Col";

@@ -1,5 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
-import Button from "./Button";
+import Button from "../components/Button";
 import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";

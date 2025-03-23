@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Button from "./Button";
+import Button from "../components/Button";
 import Container from "react-bootstrap/esm/Container";
 
 export default function Landing() {

@@ -20,9 +20,10 @@ export const NavMenu = () => {
 
   return (
     <Navbar
+      id="header"
       expand="lg"
       data-bs-theme="dark"
-      className="header text-center pt-3 pb-2"
+      className="text-center pt-3 pb-2"
     >
       <Container>
         <Navbar.Brand href="/">

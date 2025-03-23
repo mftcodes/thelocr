@@ -8,7 +8,7 @@ export const Footer = () => {
 
   return (
     <>
-      <footer className="footie text-center">
+      <footer id="footer">
         <div className="logo" />
         <p>
           Copyright <FontAwesomeIcon icon="copyright" className="mr-2" /> {year} 
