@@ -3,6 +3,7 @@ import Button from "./Button";
 import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Detail() {
   const location = useLocation();
@@ -24,6 +25,8 @@ export default function Detail() {
         "String": "",
         "Valid": false
       }`);
+  
+  const { isAuthenticated } = useAuth0();
 
   return (
     <>
@@ -132,11 +135,13 @@ export default function Detail() {
           )}
         </div>
 
-        <Row className="pt-4 text-center">
-          <Link to={"/edit"} state={resource}>
-            <Button type="bowen__alt">Edit</Button>
-          </Link>
-        </Row>
+        {isAuthenticated &&
+          <Row className="pt-4 text-center">
+            <Link to={"/edit"} state={resource}>
+              <Button type="bowen__alt">Edit</Button>
+            </Link>
+          </Row>
+        }
       </Container>
     </>
   );

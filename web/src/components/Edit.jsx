@@ -7,8 +7,13 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Loading from "../components/Loading";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
-export default function Edit() {
+export const Edit = () => {
+
+  const { user } = useAuth0();
+  
   const location = useLocation();
   const originalRes = location.state;
   const uri = "http://localhost:8080/api/resource/update";
@@ -408,4 +413,9 @@ export default function Edit() {
       </Container>
     </>
   );
-}
+};
+
+export default withAuthenticationRequired(Edit, {
+  onRedirecting: () => <Loading />,
+});
+

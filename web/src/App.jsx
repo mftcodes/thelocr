@@ -1,43 +1,50 @@
-import { Routes, Route, Outlet, Link } from "react-router-dom";
-import { Header } from "./components/Header";
-import CreateUser from "./components/CreateUser";
+import { Routes, Route, Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import { NavMenu } from "./components/NavMenu";
+import { Footer } from "./components/Footer";
 import Detail from "./components/Detail";
 import Edit from "./components/Edit";
 import Landing from "./components/Landing";
 import Search from "./components/Search";
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "./components/Loading";
+import history from "./utils/history";
 import "./App.css";
 
+// fontawesome
+import initFontAwesome from "./utils/initFontAwesome";
+initFontAwesome();
+
 export default function App() {
+  const { isLoading, error } = useAuth0();
+
+  if (error) {
+    return <div>Oops... {error.message}</div>;
+  }
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
-      <div>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Landing />} />
-            <Route path="search" element={<Search />} />
-            <Route path="detail" element={<Detail />} />
-            <Route path="edit" element={<Edit />} />
-            <Route path="createuser" element={<CreateUser />} />
+      <div id="app" className="d-flex flex-column h-100">
+          <NavMenu />
+          <Container className="flex-grow-1 mt-5">
+            <Routes history={history}>
+              <Route path="/" exact element={<Landing />} />
+              <Route path="search" element={<Search />} />
+              <Route path="detail" element={<Detail />} />
+              <Route path="edit" element={<Edit />} />
 
-            {/* path="*"" matches anything, so acts as a 
-                catch for things we haven't setup */}
-            <Route path="*" element={<NoMatch />} />
-          </Route>
-        </Routes>
+              {/* path="*"" matches anything, so acts as a 
+                  catch for things we haven't setup */}
+              <Route path="*" element={<NoMatch />} />
+            </Routes>
+          </Container>
+          <Footer />
       </div>
     </>
-  );
-}
-
-function Layout() {
-  return (
-    <div>
-      <div className="pb-2">
-        <Header />
-      </div>
-      {/* <Outlet> renders current child route component */}
-      <Outlet />
-    </div>
   );
 }
 

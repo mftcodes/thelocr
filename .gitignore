@@ -26,6 +26,7 @@ go.work
 
 # Dev notes
 zz_notes.txt
+*.json.dev
 
 # vscodium files
 .vscode/
