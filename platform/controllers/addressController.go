@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"bowen/services"
+	"bowen/platform/services"
 
 	"github.com/gin-gonic/gin"
 )

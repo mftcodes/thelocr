@@ -3,7 +3,7 @@ package router
 import (
 	"net/http"
 
-	"bowen/controllers"
+	"bowen/platform/controllers"
 
 	"github.com/gin-gonic/gin"
 )

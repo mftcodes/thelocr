@@ -3,8 +3,8 @@ package services
 import (
 	"database/sql"
 
-	"bowen/models"
-	"bowen/repositories"
+	"bowen/platform/models"
+	"bowen/platform/repositories"
 )
 
 type UserService struct{}

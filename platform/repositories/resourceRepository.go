@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 
-	"bowen/config"
-	"bowen/models"
+	"bowen/platform/config"
+	"bowen/platform/models"
 )
 
 type ResourceRepository struct{}
