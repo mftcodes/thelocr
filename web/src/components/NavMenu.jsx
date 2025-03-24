@@ -1,11 +1,14 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { useAuth0 } from "@auth0/auth0-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const NavMenu = () => {
 
   const {
+    user,
     isAuthenticated,
     loginWithRedirect,
     logout,
@@ -23,7 +26,7 @@ export const NavMenu = () => {
       id="header"
       expand="lg"
       data-bs-theme="dark"
-      className="text-center pt-3 pb-2"
+      className="text-center"
     >
       <Container>
         <Navbar.Brand href="/">
@@ -37,8 +40,19 @@ export const NavMenu = () => {
             {!isAuthenticated && (
               <Nav.Link onClick={() => loginWithRedirect({})}>Login</Nav.Link>
             )}
-            {isAuthenticated && (
+            {/* {isAuthenticated && (
               <Nav.Link onClick={() => logoutWithRedirect({})}>Logout</Nav.Link>
+            )} */}
+            {isAuthenticated && (
+              <NavDropdown title=<strong>{user.name}</strong> id="basic-nav-dropdown">
+                <NavDropdown.Item>
+                  <FontAwesomeIcon icon="user" className="mr-3" /> Profile
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={() => logoutWithRedirect({})}>
+                  <FontAwesomeIcon icon="power-off" className="mr-3" /> Log out
+                </NavDropdown.Item>
+              </NavDropdown>
             )}
           </Nav>
         </Navbar.Collapse>

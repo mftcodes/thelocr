@@ -76,7 +76,6 @@
 }
 
 .dropdown-menu {
-    height: 30em;
     max-height: 55svh;
     overflow-y: scroll;
 }
