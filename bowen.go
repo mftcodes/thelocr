@@ -1,8 +1,8 @@
 package main
 
 import (
-	"bowen/config"
-	"bowen/router"
+	"bowen/platform/config"
+	"bowen/platform/router"
 )
 
 func main() {
