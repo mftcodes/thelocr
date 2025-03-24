@@ -54,9 +54,9 @@ const SearchResults = (payload) => {
     <>
       <h2 className="text-center pb-4">Results</h2>
 
-      <Row xs={1} md={2} lg={3} className="g-3">
+      <Row xs={1} md={2} className="g-3">
         {resources.map((resource, idx) => (
-          <div className="container pb-2" key={idx}>
+          <div className="container pb-4" key={idx}>
             <div className="card card_bg">
               <div className="card-body">
                 <div className="card-title">

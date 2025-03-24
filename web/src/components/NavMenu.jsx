@@ -28,7 +28,7 @@ export const NavMenu = () => {
       data-bs-theme="dark"
       className="text-center"
     >
-      <Container>
+      <Container className="stage">
         <Navbar.Brand href="/">
           <h1>Project Bowen</h1>
         </Navbar.Brand>
@@ -42,7 +42,7 @@ export const NavMenu = () => {
             )}
             {isAuthenticated && (
               <NavDropdown title=<strong>{user.name}</strong> id="basic-nav-dropdown">
-                <NavDropdown.Item>
+                <NavDropdown.Item href="/profile">
                   <FontAwesomeIcon icon="user" className="mr-3" /> Profile
                 </NavDropdown.Item>
                 <NavDropdown.Divider />

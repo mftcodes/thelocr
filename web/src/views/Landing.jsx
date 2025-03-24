@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Container from "react-bootstrap/esm/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function Landing() {
   let navigate = useNavigate();
@@ -38,9 +40,11 @@ export default function Landing() {
           addressing these problem, and a small beginning of a much larger
           road map.
         </p>
-        <Button type="bowen" doClick={() => routeChange()}>
-          Go find a resource
-        </Button>
+          <Col className="text-center">
+            <Button type="bowen btn_bowen__alt" doClick={() => routeChange()} className="text-center">
+              Go find a resource
+            </Button>
+          </Col>
       </Container>
     </>
   );
