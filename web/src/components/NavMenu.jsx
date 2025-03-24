@@ -40,9 +40,6 @@ export const NavMenu = () => {
             {!isAuthenticated && (
               <Nav.Link onClick={() => loginWithRedirect({})}>Login</Nav.Link>
             )}
-            {/* {isAuthenticated && (
-              <Nav.Link onClick={() => logoutWithRedirect({})}>Logout</Nav.Link>
-            )} */}
             {isAuthenticated && (
               <NavDropdown title=<strong>{user.name}</strong> id="basic-nav-dropdown">
                 <NavDropdown.Item>
