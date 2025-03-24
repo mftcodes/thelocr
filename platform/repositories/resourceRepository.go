@@ -62,13 +62,12 @@ func (rr *ResourceRepository) SearchBase(terms models.ResourceSearchBase) ([]mod
  *	:modified, :modifiedBy);
  */
 func (rr *ResourceRepository) Update(res models.ResourceEdit) (sql.Result, error) {
-	const Service string = "update service"
 	sql := fmt.Sprintf(`
 	CALL minuchin.sp_updateFullResource(
 		'%s', %s, %s, %s, %s, %s, %s, %s, 
 		'%s', %s, %s, %s, %s, %s, 
 		'%s', %s, %s, %s, %d, %s, %d, %d, %s, 
-		null, '%s');`,
+		null, %s);`,
 		res.Address.Addr_uuid,
 		sqlNullStrToStr(res.Address.Line_1),
 		sqlNullStrToStr(res.Address.Line_2),
@@ -92,7 +91,7 @@ func (rr *ResourceRepository) Update(res models.ResourceEdit) (sql.Result, error
 		boolToBit(res.Resource.Is_statewide),
 		boolToBit(res.Resource.Is_nationwide),
 		sqlNullStrToStr(res.Resource.Keyword),
-		Service)
+		sqlNullStrToStr(res.Resource.Modified_by))
 	result, err := config.DBConn.Exec(sql)
 	if err != nil {
 		return result, err

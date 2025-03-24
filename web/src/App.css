@@ -1,9 +1,9 @@
 :root {
     --title: #1d243b;
-    --background: #bcc0d3;
+    --background: #d8dcec;
     --primary_dark: #434d75;
     --primary_dark_hover: #67729c;
-    --primary_light: #bcc0d3;
+    --primary_light: #d8dcec;
     --secondary: #285b5e;
     --secondary_hover: #558e91;
 }
@@ -24,15 +24,24 @@
     color: white;
     padding: 2em 0;
     text-align: center;
+
+    .stage {
+        max-width: 60em;
+    }
 }
 
 #header {
     background-color: var(--title);
+
+    .stage {
+        max-width: 60em;
+    }
 }
 
 #app > .container {
     padding-bottom: 2em;
     margin-bottom: 5em;
+    max-width: 60em;
 }
 
 .row > .container > .card_bg {

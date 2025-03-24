@@ -91,6 +91,7 @@ export const Edit = () => {
         County: toSqlNullStr(modifiedRes.County),
         State: toSqlNullStr(modifiedRes.State),
         Postal_code: toSqlNullStr(modifiedRes.Postal_code),
+        Modified_By: toSqlNullStr(user.email),
       },
       Contact: {
         Con_uuid: modifiedRes.Con_uuid,
@@ -99,6 +100,7 @@ export const Edit = () => {
         Phone_tty: toSqlNullStr(modifiedRes.Phone_tty),
         Fax: toSqlNullStr(modifiedRes.Fax),
         Email: toSqlNullStr(modifiedRes.Email),
+        Modified_By: toSqlNullStr(user.email),
       },
       Resource: {
         Res_uuid: modifiedRes.Res_uuid,
@@ -109,6 +111,7 @@ export const Edit = () => {
         parentUuid: "",
         isStatewide: "",
         keyword: toSqlNullStr(""),
+        Modified_By: toSqlNullStr(user.email),
       },
     };
   }

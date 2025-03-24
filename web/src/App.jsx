@@ -6,6 +6,7 @@ import Detail from "./views/Detail";
 import Edit from "./views/Edit";
 import Landing from "./views/Landing";
 import Search from "./views/Search";
+import Profile from "./views/Profile";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "./components/Loading";
 import history from "./utils/history";
@@ -36,6 +37,7 @@ export default function App() {
               <Route path="search" element={<Search />} />
               <Route path="detail" element={<Detail />} />
               <Route path="edit" element={<Edit />} />
+              <Route path="profile" element={<Profile />} />
 
               {/* path="*"" matches anything, so acts as a 
                   catch for things we haven't setup */}
