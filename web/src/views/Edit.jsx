@@ -10,42 +10,45 @@ import Row from "react-bootstrap/Row";
 import Loading from "../components/Loading";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
-export const Edit = () => {
-
+export const Edit = ({isCreate = false}) => {
   const { user } = useAuth0();
   
+  const title = isCreate ? "New Community Resource" : "Edit Community Resource"
   const location = useLocation();
   const originalRes = location.state;
-  const uri = "http://localhost:8080/api/resource/update";
-  const [county, setCounty] = useState(originalRes.County.String);
+  const uri = isCreate 
+    ? "http://localhost:8080/api/resource/create" 
+    : "http://localhost:8080/api/resource/update";
+  const [county, setCounty] = useState(isCreate ? "" : originalRes.County.String);
   const [countySelected, setCountySelected] = useState(false);
   const [category, setCategory] = useState("Make Selection");
   const [categorySelected, setCategorySelected] = useState(false);
-  const [categoryId, setCategoryId] = useState(originalRes.Cat_id);
+  const [categoryId, setCategoryId] = useState(isCreate ? "" : originalRes.Cat_id);
+  const [isParent, setIsParent] = useState(isCreate ? false : originalRes.isParent);
   const [modifiedRes, setModRef] = useState({
     createdBy: "",
-    Res_uuid: originalRes.Res_uuid,
-    Res_title: originalRes.Res_title.String,
-    Res_desc: originalRes.Res_desc.String,
-    Url: originalRes.Url.String,
+    Res_uuid: isCreate ? "" : originalRes.Res_uuid,
+    Res_title: isCreate ? "" : originalRes.Res_title.String,
+    Res_desc: isCreate ? "" : originalRes.Res_desc.String,
+    Url: isCreate ? "" : originalRes.Url.String,
     // placeholders, will be adding these to the model
-    isParent: "",
+    isParent: false,
     parentUuid: "",
     isStatewide: "",
     keyword: "",
-    Addr_uuid: originalRes.Addr_uuid,
-    Line_1: originalRes.Line_1.String,
-    Line_2: originalRes.Line_2.String,
-    City: originalRes.City.String,
-    County: originalRes.County.String,
-    State: originalRes.State.String,
-    Postal_code: originalRes.Postal_code.String,
-    Con_uuid: originalRes.Con_uuid,
-    Phone_1: originalRes.Phone_1.String,
-    Phone_2: originalRes.Phone_2.String,
-    Phone_tty: originalRes.Phone_tty.String,
-    Fax: originalRes.Fax.String,
-    Email: originalRes.Email.String,
+    Addr_uuid: isCreate ? "" : originalRes.Addr_uuid,
+    Line_1: isCreate ? "" : originalRes.Line_1.String,
+    Line_2: isCreate ? "" : originalRes.Line_2.String,
+    City: isCreate ? "" : originalRes.City.String,
+    County: isCreate ? "" : originalRes.County.String,
+    State: isCreate ? "MI" : originalRes.State.String,
+    Postal_code: isCreate ? "" : originalRes.Postal_code.String,
+    Con_uuid: isCreate ? "" : originalRes.Con_uuid,
+    Phone_1: isCreate ? "" : originalRes.Phone_1.String,
+    Phone_2: isCreate ? "" : originalRes.Phone_2.String,
+    Phone_tty: isCreate ? "" : originalRes.Phone_tty.String,
+    Fax: isCreate ? "" : originalRes.Fax.String,
+    Email: isCreate ? "" : originalRes.Email.String,
   });
   const updateModRef = (e) => {
     const { name, value } = e.target;
@@ -82,38 +85,63 @@ export const Edit = () => {
   }
 
   function setPayload() {
-    return {
-      Address: {
-        Addr_uuid: modifiedRes.Addr_uuid,
+    if (isCreate) {
+      return {
+        Created_by: toSqlNullStr(user.email),
+        Res_title: toSqlNullStr(modifiedRes.Res_title),
+        Res_desc: toSqlNullStr(modifiedRes.Res_desc),
+        Url: toSqlNullStr(modifiedRes.Url),
+        Is_parent: isParent,
+        Parent_uuid: toSqlNullStr(""),
+        Is_statewide: false,
+        Keyword: toSqlNullStr(""),
         Line_1: toSqlNullStr(modifiedRes.Line_1),
         Line_2: toSqlNullStr(modifiedRes.Line_2),
         City: toSqlNullStr(modifiedRes.City),
-        County: toSqlNullStr(modifiedRes.County),
+        County: toSqlNullStr(county),
         State: toSqlNullStr(modifiedRes.State),
         Postal_code: toSqlNullStr(modifiedRes.Postal_code),
-        Modified_By: toSqlNullStr(user.email),
-      },
-      Contact: {
-        Con_uuid: modifiedRes.Con_uuid,
         Phone_1: toSqlNullStr(modifiedRes.Phone_1),
         Phone_2: toSqlNullStr(modifiedRes.Phone_2),
         Phone_tty: toSqlNullStr(modifiedRes.Phone_tty),
         Fax: toSqlNullStr(modifiedRes.Fax),
         Email: toSqlNullStr(modifiedRes.Email),
-        Modified_By: toSqlNullStr(user.email),
-      },
-      Resource: {
-        Res_uuid: modifiedRes.Res_uuid,
-        Res_title: toSqlNullStr(modifiedRes.Res_title),
-        Res_desc: toSqlNullStr(modifiedRes.Res_desc),
-        Url: toSqlNullStr(modifiedRes.Url),
-        isParent: "",
-        parentUuid: "",
-        isStatewide: "",
-        keyword: toSqlNullStr(""),
-        Modified_By: toSqlNullStr(user.email),
-      },
-    };
+        Cat_id: categoryId,
+      };
+    } else {
+      return {
+        Address: {
+          Addr_uuid: modifiedRes.Addr_uuid,
+          Line_1: toSqlNullStr(modifiedRes.Line_1),
+          Line_2: toSqlNullStr(modifiedRes.Line_2),
+          City: toSqlNullStr(modifiedRes.City),
+          County: toSqlNullStr(county),
+          State: toSqlNullStr(modifiedRes.State),
+          Postal_code: toSqlNullStr(modifiedRes.Postal_code),
+          Modified_By: toSqlNullStr(user.email),
+        },
+        Contact: {
+          Con_uuid: modifiedRes.Con_uuid,
+          Phone_1: toSqlNullStr(modifiedRes.Phone_1),
+          Phone_2: toSqlNullStr(modifiedRes.Phone_2),
+          Phone_tty: toSqlNullStr(modifiedRes.Phone_tty),
+          Fax: toSqlNullStr(modifiedRes.Fax),
+          Email: toSqlNullStr(modifiedRes.Email),
+          Modified_By: toSqlNullStr(user.email),
+        },
+        Resource: {
+          Res_uuid: modifiedRes.Res_uuid,
+          Res_title: toSqlNullStr(modifiedRes.Res_title),
+          Res_desc: toSqlNullStr(modifiedRes.Res_desc),
+          Url: toSqlNullStr(modifiedRes.Url),
+          isParent: isParent,
+          parentUuid: "",
+          isStatewide: "",
+          keyword: toSqlNullStr(""),
+          Modified_By: toSqlNullStr(user.email),
+        },
+      };
+    }
   }
 
   function toSqlNullStr(s) {
@@ -124,9 +152,13 @@ export const Edit = () => {
     }
   }
 
+  const updateIsParent = () => { 
+    setIsParent(!isParent); 
+  }; 
+
   return (
     <>
-      <h2 className="text-center search pb-3">Edit Community Resources</h2>
+      <h2 className="text-center search pb-3">{title}</h2>
       <Container>
         <Form>
           {/* *** RESOURCE NAME/TITLE *** */}
@@ -157,7 +189,12 @@ export const Edit = () => {
                 onChange={updateModRef}
                 name="isParent"
               /> */}
-              <Form.Check type="checkbox" label="Headquarters office?" />
+              <Form.Check 
+                type="checkbox" 
+                label="Headquarters office?"
+                value={isParent}
+                onChange={updateIsParent}
+                name="isParent" />
               <Form.Text className="text-muted">
                 Is this the organations headquarters/main offices?
               </Form.Text>
@@ -267,7 +304,7 @@ export const Edit = () => {
             <Form.Group as={Col} controlId="formCounty">
               <Form.Label>County</Form.Label>
               <CountyDropdown
-                label={`County: ${county}   `}
+                label={`County: ${county}`}
                 onChoice={(choice) => {
                   setCounty(choice);
                   setCountySelected(true);
@@ -421,4 +458,3 @@ export const Edit = () => {
 export default withAuthenticationRequired(Edit, {
   onRedirecting: () => <Loading />,
 });
-

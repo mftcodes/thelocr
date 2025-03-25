@@ -36,7 +36,8 @@ export default function App() {
               <Route path="/" exact element={<Landing />} />
               <Route path="search" element={<Search />} />
               <Route path="detail" element={<Detail />} />
-              <Route path="edit" element={<Edit />} />
+              <Route path="create" element={<Edit isCreate={true} />} />
+              <Route path="edit" element={<Edit isCreate={false} />} />
               <Route path="profile" element={<Profile />} />
 
               {/* path="*"" matches anything, so acts as a 
