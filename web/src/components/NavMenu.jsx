@@ -41,6 +41,9 @@ export const NavMenu = () => {
               <Nav.Link onClick={() => loginWithRedirect({})}>Login</Nav.Link>
             )}
             {isAuthenticated && (
+              <Nav.Link href="/create">New Resource</Nav.Link>
+            )}
+            {isAuthenticated && (
               <NavDropdown title=<strong>{user.name}</strong> id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile">
                   <FontAwesomeIcon icon="user" className="mr-3" /> Profile

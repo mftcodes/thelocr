@@ -15,11 +15,26 @@ func (rr *ResourceRepository) Create(res models.ResourceInsert) (sql.Result, err
 	isStatewide := boolToBit(res.Is_statewide)
 
 	sql := fmt.Sprintf(`
-	CALL minuchin.sp_insertResource('%v','%v','%v','%v',%d,'%v',%d,'%v','%v','%v','%v','%v','%v','%v','%v','%v','%v','%v','%v',%d)`,
-		res.Created_by,
-		res.Res_title, res.Res_desc, res.Url, isParent, res.Parent_uuid, isStatewide, res.Keyword,
-		res.Line_1, res.Line_2, res.City, res.County, res.State, res.Postal_code,
-		res.Phone_1, res.Phone_2, res.Phone_tty, res.Fax, res.Email,
+	CALL minuchin.sp_insertResource(%v,%v,%v,%v,%d,%v,%d,%v,%v,%v,%v,%v,%v,%v,%v,%v,%v,%v,%v,%d)`,
+		sqlNullStrToStr(res.Created_by),
+		sqlNullStrToStr(res.Res_title),
+		sqlNullStrToStr(res.Res_desc),
+		sqlNullStrToStr(res.Url),
+		isParent,
+		sqlNullStrToStr(res.Parent_uuid),
+		isStatewide,
+		sqlNullStrToStr(res.Keyword),
+		sqlNullStrToStr(res.Line_1),
+		sqlNullStrToStr(res.Line_2),
+		sqlNullStrToStr(res.City),
+		sqlNullStrToStr(res.County),
+		sqlNullStrToStr(res.State),
+		sqlNullStrToStr(res.Postal_code),
+		sqlNullStrToStr(res.Phone_1),
+		sqlNullStrToStr(res.Phone_2),
+		sqlNullStrToStr(res.Phone_tty),
+		sqlNullStrToStr(res.Fax),
+		sqlNullStrToStr(res.Email),
 		res.Cat_id)
 	result, err := config.DBConn.Exec(sql)
 	if err != nil {
