@@ -3,6 +3,7 @@ package controllers
 import (
 	"net/http"
 
+	"bowen/platform/logs"
 	"bowen/platform/models"
 	"bowen/platform/services"
 
@@ -22,11 +23,13 @@ var resourceService = new(services.ResourceService)
 func (rc *ResourceController) Create(c *gin.Context) {
 	var resInput models.ResourceInsert
 	if err := c.ShouldBindJSON(&resInput); err != nil {
+		logs.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	_, err := resourceService.Create(resInput)
 	if err != nil {
+		logs.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -36,12 +39,14 @@ func (rc *ResourceController) Create(c *gin.Context) {
 func (rc *ResourceController) Search(c *gin.Context) {
 	var terms models.ResourceSearchBase
 	if err := c.ShouldBindJSON(&terms); err != nil {
+		logs.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	result, err := resourceService.SearchBase(terms)
 	if err != nil {
+		logs.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -52,12 +57,14 @@ func (rc *ResourceController) Search(c *gin.Context) {
 func (rc *ResourceController) Update(c *gin.Context) {
 	var res models.ResourceEdit
 	if err := c.ShouldBindJSON(&res); err != nil {
+		logs.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"A error": err.Error()})
 		return
 	}
 
 	result, err := resourceService.Update(res)
 	if err != nil {
+		logs.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"B error": err.Error()})
 		return
 	}
