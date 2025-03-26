@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import logger from "../utils/logger";
 
 export default function CreateUser() {
   const uri = "http://localhost:8080/api/user/create";
@@ -37,13 +38,14 @@ export default function CreateUser() {
         ).json(),
       ]);
       if (!resp) {
-        console.log("Need to log this error, or do something.");
+        logger.debug(`CreateUser.jsx: Failed to create user, result emtpy.`);
         return;
       } else {
+        logger.info(`GreatUser.jsx: New User Created.`)
         // Success do something else. User profile probably. 
       }
     } catch (error) {
-      console.log(error);
+      logger.error(`CreateUser.jsx: Error creating user = ${error}`)
     }
   }
 

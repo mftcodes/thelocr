@@ -18,7 +18,7 @@ func (cr *CategoryRepository) GetAll() ([]models.Category, error) {
 	`
 	rows, err := config.DBConn.Query(sql)
 	if err != nil {
-		panic(err)
+		return cats, err
 	}
 	defer rows.Close()
 

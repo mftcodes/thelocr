@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import logger from "../utils/logger";
 
 const SearchResults = (payload) => {
   const uri = "http://localhost:8080/api/resource/search";
@@ -23,14 +24,14 @@ const SearchResults = (payload) => {
         ).json(),
       ]);
       if (!resp) {
-        console.log("Need to log this error, or do something.");
+        logger.debug(`SearchResults.jsx: Search results emtpy.`);
       } else if (resp.length > 0) {
         setResources(resp);
       } else {
-        console.log("Need to log this error, too.");
+        logger.debug(`SearchResults.jsx: recieved response, but it's... broke?`);
       }
     } catch (error) {
-      console.log(error);
+      logger.error(`SearchResults.jsx: Search Error - ${error}`);
     }
   }
 
