@@ -4,11 +4,11 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
-
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "@auth0/auth0-react";
 import history from "./utils/history";
 import { getConfig } from "./config";
+import logger from "./utils/logger"
 
 const onRedirectCallback = (appState) => {
   history.push(
@@ -31,6 +31,13 @@ const providerConfig = {
   cacheLocation: "localstorage",
   useRefreshTokens: true
 };
+
+// Setting app log level
+if (import.meta.env.PROD) {
+  logger.setLevel("warn");
+} else {
+  logger.setLevel("debug");
+}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Auth0Provider {...providerConfig}>

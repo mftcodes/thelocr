@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Loading from "../components/Loading";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import logger from "../utils/logger";
 
 export const Edit = ({isCreate = false}) => {
   const { user } = useAuth0();
@@ -73,14 +74,16 @@ export const Edit = ({isCreate = false}) => {
           })
         ).json(),
       ]);
+      const action = isCreate ? "Create" : "Edit";
       if (!resp) {
-        console.log("Need to log this error, or do something.");
+        logger.debug(`Edit.jsx: Failed to ${action} resource, response empty.`)
         return;
       } else {
+        logger.info(`Edit.jsx: ${action} resource successful.`);
         // Success, need to go back to detail and refresh with saved data
       }
     } catch (error) {
-      console.log(error);
+      logger.info(`Edit.jsx: Error attemptint to ${action} a resource - ${error}`);
     }
   }
 
