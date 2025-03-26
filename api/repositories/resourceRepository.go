@@ -4,11 +4,41 @@ import (
 	"database/sql"
 	"fmt"
 
-	"bowen/platform/config"
-	"bowen/platform/models"
+	"bowen/api/config"
+	"bowen/api/models"
 )
 
 type ResourceRepository struct{}
+
+func (rr *ResourceRepository) GetById(id string) (models.ResourceDetail, error) {
+	var resDetail models.ResourceDetail
+	sql := fmt.Sprintf(`
+	SELECT BIN_TO_UUID(r.res_uuid) as res_uuid, r.res_title, r.res_desc, r.url, BIN_TO_UUID(a.addr_uuid) as addr_uuid, 
+		a.line_1, a.line_2, a.line_3, a.city, a.county, a.state, a.postal_code, BIN_TO_UUID(c.con_uuid) as con_uuid, 
+		c.phone_1, c.phone_2, c.phone_tty, c.fax, c.email
+	FROM minuchin.resource as r
+		JOIN minuchin.detail as d on r.res_uuid = d.res_uuid
+		JOIN minuchin.address as a on d.addr_uuid = a.addr_uuid
+		JOIN minuchin.contact as c on d.con_uuid = c.con_uuid
+		JOIN minuchin.classification as cl on r.res_uuid = cl.res_uuid
+		RIGHT JOIN minuchin.category as ct on cl.cat_id = ct.cat_id
+	WHERE r.res_uuid = UUID_TO_BIN('%s')`, id)
+
+	rows, err := config.DBConn.Query(sql)
+	if err != nil {
+		return resDetail, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		err := rows.Scan(&resDetail.Res_uuid, &resDetail.Res_title, &resDetail.Res_desc, &resDetail.Url, &resDetail.Addr_uuid, &resDetail.Line_1, &resDetail.Line_2, &resDetail.Line_3, &resDetail.City, &resDetail.County, &resDetail.State, &resDetail.Postal_code, &resDetail.Con_uuid, &resDetail.Phone_1, &resDetail.Phone_2, &resDetail.Phone_tty, &resDetail.Fax, &resDetail.Email)
+		if err != nil {
+			return resDetail, err
+		}
+	}
+
+	return resDetail, nil
+}
 
 func (rr *ResourceRepository) Create(res models.ResourceInsert) (sql.Result, error) {
 	isParent := boolToBit(res.Is_parent)
@@ -61,7 +91,7 @@ func (rr *ResourceRepository) SearchBase(terms models.ResourceSearchBase) ([]mod
 		var resDet models.ResourceDetail
 		err := rows.Scan(&resDet.Res_uuid, &resDet.Res_title, &resDet.Res_desc, &resDet.Url, &resDet.Addr_uuid, &resDet.Line_1, &resDet.Line_2, &resDet.Line_3, &resDet.City, &resDet.County, &resDet.State, &resDet.Postal_code, &resDet.Con_uuid, &resDet.Phone_1, &resDet.Phone_2, &resDet.Phone_tty, &resDet.Fax, &resDet.Email)
 		if err != nil {
-			panic(err)
+			return resDetails, err
 		}
 		resDetails = append(resDetails, resDet)
 	}
