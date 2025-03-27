@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"bowen/platform/config"
+	"bowen/api/config"
 )
 
 var (

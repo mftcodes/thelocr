@@ -24,11 +24,11 @@ const SearchResults = (payload) => {
         ).json(),
       ]);
       if (!resp) {
-        logger.debug(`SearchResults.jsx: Search results emtpy.`);
+        logger.debug(`SearchResults.jsx: Search results empty.`);
       } else if (resp.length > 0) {
         setResources(resp);
       } else {
-        logger.debug(`SearchResults.jsx: recieved response, but it's... broke?`);
+        logger.debug(`SearchResults.jsx: received response, but it's... broke?`);
       }
     } catch (error) {
       logger.error(`SearchResults.jsx: Search Error - ${error}`);
