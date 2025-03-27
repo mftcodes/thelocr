@@ -3,7 +3,7 @@ package router
 import (
 	"net/http"
 
-	"bowen/platform/controllers"
+	"bowen/api/controllers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,6 +28,7 @@ func InitRouter() *gin.Engine {
 		}
 		resource := api.Group("/resource")
 		{
+			resource.GET(":uuid", resourceController.Detail)
 			resource.PUT("", resourceController.Create)
 			resource.POST("/search", resourceController.Search)
 			resource.POST("/create", resourceController.Create)

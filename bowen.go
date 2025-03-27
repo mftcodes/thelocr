@@ -1,9 +1,9 @@
 package main
 
 import (
-	"bowen/platform/config"
-	"bowen/platform/logs"
-	"bowen/platform/router"
+	"bowen/api/config"
+	"bowen/api/logs"
+	"bowen/api/router"
 )
 
 func main() {

@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 
-	"bowen/platform/config"
-	"bowen/platform/models"
+	"bowen/api/config"
+	"bowen/api/models"
 
 	"golang.org/x/crypto/bcrypt"
 )

@@ -1,8 +1,8 @@
 package services
 
 import (
-	"bowen/platform/models"
-	"bowen/platform/repositories"
+	"bowen/api/models"
+	"bowen/api/repositories"
 )
 
 type CategoryService struct{}
