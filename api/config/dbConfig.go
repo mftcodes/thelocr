@@ -3,7 +3,6 @@ package config
 import (
 	"bufio"
 	"database/sql"
-	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -23,19 +22,17 @@ var (
 	DBConn *sql.DB
 )
 
-func InitDB() {
+func InitDB() error {
 	var connectionFileUri string
 	env := os.Getenv("ENV")
-	if env == "" {
+	if env != "prod" {
 		env = "dev"
-	} else {
-		env = "prod"
 	}
 
 	if env == "dev" {
 		err := SetupLocalDevEnv()
 		if err != nil {
-			panic(fmt.Sprintf("Failed to setup local dev environment: %w", err))
+			return err
 		}
 		connectionFileUri = SetLocalConfFileUri()
 	} else {
@@ -44,7 +41,7 @@ func InitDB() {
 	// TODO: add URI and adjust code when we have a definitive answer to where and how to store this information
 	c, err := getConnection(connectionFileUri)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to get sql connection configuration for %s environment: %w", env, err))
+		return err
 	}
 
 	cfg := mysql.Config{
@@ -58,15 +55,17 @@ func InitDB() {
 
 	db, err := sql.Open("mysql", cfg.FormatDSN())
 	if err != nil {
-		panic(fmt.Sprintf("Failed to open Db connections for %s environment: %w", env, err))
+		return err
 	}
 
 	err = db.Ping()
 	if err != nil {
-		panic(fmt.Sprintf("Failed to ping Db connections for %s environment: %w", env, err))
+		return err
 	}
 
 	DBConn = db
+
+	return nil
 }
 
 func getConnection(configUri string) (c Connection, err error) {

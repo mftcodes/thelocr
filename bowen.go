@@ -12,7 +12,11 @@ func main() {
 
 	logs.InfoLog.Println("Starting up Project Bowen API...")
 
-	config.InitDB()
+	err := config.InitDB()
+	if err != nil {
+		logs.ErrorLog.Printf("Failed to setup and configure database: %s", err)
+		panic(err)
+	}
 
 	router := router.InitRouter()
 
