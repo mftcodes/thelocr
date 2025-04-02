@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Alert from "../components/Alert";
 import Button from "../components/Button";
 import CountyDropdown from "../components/CountyDropdown";
 import CategoryDropdown from "../components/CategoryDropdown";
@@ -13,6 +14,8 @@ import logger from "../utils/logger";
 
 export const Edit = ({isCreate = false}) => {
   const { user } = useAuth0();
+  const [isErrorState, setIsErrorState] = useState(false);
+  const [editError, setEditError] = useState("");
   const title = isCreate ? "New Community Resource" : "Edit Community Resource"
   const location = useLocation();
   const navigate = useNavigate();
@@ -76,6 +79,9 @@ export const Edit = ({isCreate = false}) => {
       ]);
       const action = isCreate ? "Create" : "Edit";
       if (!resp) {
+        setEditError(`Failed to update "${payload.Resource.Res_title.String}", please try again. If this continues, please contact us.`);
+        setIsErrorState(true);
+        
         logger.debug(`Edit.jsx: Failed to ${action} resource, response empty.`)
         return;
       } else {
@@ -85,6 +91,9 @@ export const Edit = ({isCreate = false}) => {
       let redirectUri = `/detail/${payload.Resource.Res_uuid}`;
       navigate(redirectUri);
     } catch (error) {
+      setEditError(`Failed to update "${payload.Resource.Res_title.String}", please try again. If this continues, please contact us.`);
+      setIsErrorState(true);
+
       logger.info(`Edit.jsx: Error attemptint to ${action} a resource - ${error}`);
     }
   }
@@ -160,6 +169,11 @@ export const Edit = ({isCreate = false}) => {
   const updateIsParent = () => { 
     setIsParent(!isParent); 
   }; 
+
+  function closeAlert() {
+    setIsErrorState(!isErrorState);
+    setEditError("");
+  }
 
   return (
     <>
@@ -450,7 +464,11 @@ export const Edit = ({isCreate = false}) => {
               "legal aid, immigration"). <em>*Not currently implemented</em>
             </Form.Text>
           </Form.Group>
-
+          {isErrorState && <Alert 
+            children={editError} 
+            type={"danger"}
+            onClose={closeAlert}
+          />}
           <Button type="bowen" doClick={() => update()}>
             Submit
           </Button>
