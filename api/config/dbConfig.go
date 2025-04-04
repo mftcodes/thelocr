@@ -22,7 +22,7 @@ var (
 	DBConn *sql.DB
 )
 
-func InitDB() error {
+func InitDB() (string, error) {
 	var connectionFileUri string
 	env := os.Getenv("ENV")
 	if env != "prod" {
@@ -32,7 +32,7 @@ func InitDB() error {
 	if env == "dev" {
 		err := SetupLocalDevEnv()
 		if err != nil {
-			return err
+			return env, err
 		}
 		connectionFileUri = SetLocalConfFileUri()
 	} else {
@@ -41,7 +41,7 @@ func InitDB() error {
 	// TODO: add URI and adjust code when we have a definitive answer to where and how to store this information
 	c, err := getConnection(connectionFileUri)
 	if err != nil {
-		return err
+		return env, err
 	}
 
 	cfg := mysql.Config{
@@ -55,17 +55,17 @@ func InitDB() error {
 
 	db, err := sql.Open("mysql", cfg.FormatDSN())
 	if err != nil {
-		return err
+		return env, err
 	}
 
 	err = db.Ping()
 	if err != nil {
-		return err
+		return env, err
 	}
 
 	DBConn = db
 
-	return nil
+	return env, nil
 }
 
 func getConnection(configUri string) (c Connection, err error) {
