@@ -31,7 +31,7 @@ export const NavMenu = () => {
       >
         <Container className="stage">
           <Navbar.Brand href="/">
-            <h1>Project Bowen</h1>
+            <h1>The LOCR</h1>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

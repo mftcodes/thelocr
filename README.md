@@ -6,7 +6,7 @@ This project is working toward a community driven and maintained Community Resou
 
 I worked for over 10 years in Community Mental Health and it was always a struggle to obtain, and maintain, an up-to-date list of community based resources. Many clients required far more than I was able to give them, and many of those needs are met through community based programs, services, and connections. There simply is not a one-stop place to see what all is out there to be able to provide the clients with the information they need. We do have 211 and it is a great service; however, one of the biggest complaints I heard about 211 was how quickly some of their resources were out of date. Additionally, outside of Michigan (and probably some other states) the only way to get connected is to call 211 and get the support you need. This is a great service, and one I have no desire to replace. However, sometimes, it is just simpler to grab your phone, or get on a library computer, and find what you need without having to be social.
 
-My hope is that this API is the base building block to begin addressing this problem, and is but a small piece of a much larger road map.
+My hope is that this app is the base building block to begin addressing this problem, and is small piece of a much larger road map.
 
 This is a work in progress...
 
@@ -48,7 +48,7 @@ NOTE: You must have the API running in order for the front end to function.
 
 1. initialize the project from the root directory
    ```
-   go mod init bowen
+   go mod init thelocr
    go mod tidy
    ```
 2. build all modules (`go build .` should finish without errors)
@@ -64,7 +64,7 @@ NOTE: You must have the API running in order for the front end to function.
       ```
 3. cd back to root, install managefs
    ```
-   go install bowen
+   go install thelocr
    ```
 4. you may need to add to your PATH in order to call the compiled program from BASH
    ```
@@ -72,7 +72,7 @@ NOTE: You must have the API running in order for the front end to function.
    ```
 5. run the program
    ```
-   bowen
+   thelocr
    ```
 6. Optional: clean up, run `go clean -modcache` to clean up install cache
 
@@ -87,7 +87,7 @@ NOTE: You must have the API running in order for the front end to function.
            "type": "go",
            "request": "launch",
            "mode": "auto",
-           "program": "${workspaceFolder}/bowen.go"
+           "program": "${workspaceFolder}/thelocr.go"
        }
    ]
    ```

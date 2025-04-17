@@ -200,7 +200,7 @@ export default function Detail() {
           {isAuthenticated &&
             <Row className="pt-4 text-center">
               <Link to={"/edit"} state={resource}>
-                <Button type="bowen__alt">Edit</Button>
+                <Button type="thelocr__alt">Edit</Button>
               </Link>
             </Row>
           }

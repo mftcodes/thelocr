@@ -1,9 +1,9 @@
-Description=bowen api
+Description=the locr api
 After=network.target
 
 [Service]
 User=root
 Group=www-data
-ExecStart=/var/www/go/bowen
+ExecStart=/var/www/go/locr
 [Install]
 WantedBy=multi-user.target

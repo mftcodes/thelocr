@@ -3,7 +3,7 @@ package router
 import (
 	"net/http"
 
-	"bowen/api/controllers"
+	"thelocr/api/controllers"
 
 	"github.com/gin-gonic/gin"
 )

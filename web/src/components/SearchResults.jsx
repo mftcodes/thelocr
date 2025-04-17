@@ -123,7 +123,7 @@ const SearchResults = (payload) => {
               <div className="card-footer">
                 <Row className="text-center">
                   <Link to={"/detail"} state={resource}>
-                    <Button type="bowen__alt">Learn More</Button>
+                    <Button type="thelocr__alt">Learn More</Button>
                   </Link>
                 </Row>
               </div>

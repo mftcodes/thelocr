@@ -1,5 +1,5 @@
 {
-  "domain": "domain.us.auth0.com",
-  "clientId": "__clientId__",
-  "audience": "__audience__"
+  "domain": "dev-crfuzemfsuxw1pp7.us.auth0.com",
+  "clientId": "Kr6vCUnyk02S3XpavFDVqNdKNBe5iSi6",
+  "audience": "https://auth0.projectbowen.com/api"
 }

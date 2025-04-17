@@ -44,7 +44,7 @@ export default function Search() {
         {countySelected && categorySelected && (
           <div className="text-center pt-4">
             <Button
-              type="bowen__alt"
+              type="thelocr__alt"
               doClick={() => {
                 const payload = {
                   Is_statewide: true,

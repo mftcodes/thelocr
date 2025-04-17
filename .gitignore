@@ -7,7 +7,7 @@
 *.dll
 *.so
 *.dylib
-bowen
+thelocr
 
 # Test binary, built with `go test -c`
 *.test

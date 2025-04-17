@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"bowen/api/logs"
-	"bowen/api/services"
+	"thelocr/api/logs"
+	"thelocr/api/services"
 
 	"github.com/gin-gonic/gin"
 )
