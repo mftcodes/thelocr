@@ -469,7 +469,7 @@ export const Edit = ({isCreate = false}) => {
             type={"danger"}
             onClose={closeAlert}
           />}
-          <Button type="bowen" doClick={() => update()}>
+          <Button type="thelocr" doClick={() => update()}>
             Submit
           </Button>
         </Form>

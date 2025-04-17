@@ -1,16 +1,16 @@
 package main
 
 import (
-	"bowen/api/config"
-	"bowen/api/logs"
-	"bowen/api/router"
+	"thelocr/api/config"
+	"thelocr/api/logs"
+	"thelocr/api/router"
 )
 
 func main() {
 	config.SetupLogging()
 	logs.InitLogging()
 
-	logs.InfoLog.Println("Starting up Project Bowen API...")
+	logs.InfoLog.Println("Starting up LOCR API...")
 
 	env, err := config.InitDB()
 	if err != nil {

@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"bowen/api/config"
+	"thelocr/api/config"
 )
 
 var (

@@ -8,7 +8,7 @@ const CountyDropdown = ({ label, onChoice }) => {
   // Dropdown needs access to the DOM node in order to position the Menu
   const Toggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
-      className="btn btn_bowen"
+      className="btn btn_thelocr"
       href=""
       ref={ref}
       onClick={(e) => {

@@ -133,7 +133,7 @@ export default function CreateUser() {
             </Col>
           </Form.Group>
 
-          <Button type="bowen" doClick={() => createNewUser()}>
+          <Button type="thelocr" doClick={() => createNewUser()}>
             Submit
           </Button>
         </Form>

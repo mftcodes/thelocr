@@ -3,8 +3,8 @@ package services
 import (
 	"database/sql"
 
-	"bowen/api/models"
-	"bowen/api/repositories"
+	"thelocr/api/models"
+	"thelocr/api/repositories"
 )
 
 type UserService struct{}

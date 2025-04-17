@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 
-	"bowen/api/config"
-	"bowen/api/models"
+	"thelocr/api/config"
+	"thelocr/api/models"
 )
 
 type ResourceRepository struct{}
