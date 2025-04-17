@@ -1,8 +1,8 @@
-# projectbowen
+# The Library of Online Community Resources (TheLOCR)
 
 ## Description
 
-This project is working toward a community driven and maintained Community Resource Reposetory for all types of services.
+This project works toward a community driven and maintained Community Resource Repository for all types of services.
 
 I worked for over 10 years in Community Mental Health and it was always a struggle to obtain, and maintain, an up-to-date list of community based resources. Many clients required far more than I was able to give them, and many of those needs are met through community based programs, services, and connections. There simply is not a one-stop place to see what all is out there to be able to provide the clients with the information they need. We do have 211 and it is a great service; however, one of the biggest complaints I heard about 211 was how quickly some of their resources were out of date. Additionally, outside of Michigan (and probably some other states) the only way to get connected is to call 211 and get the support you need. This is a great service, and one I have no desire to replace. However, sometimes, it is just simpler to grab your phone, or get on a library computer, and find what you need without having to be social.
 
@@ -16,7 +16,7 @@ Go API is based on Go version `1.21.1`, and this must be installed. See [Go docs
 
 For Windows OS we also recommend installing [Docker Desktop](https://www.docker.com/products/docker-desktop/) and [DBeaver](https://dbeaver.io/download/)
 
-NOTE: You must have the API running in order for the front end to function.
+___NOTE___: You must have the API running in order for the front end to function.
 
 ## Database Setup:
 
@@ -44,25 +44,21 @@ NOTE: You must have the API running in order for the front end to function.
 7.  Under `connection settings > driver properties >` set `allowPublicKeyRetrieval` to `TRUE`
 8.  Open a query window for the db and run the initDB.sql script
 
-## Go Back End API, Option 1
+## Go Back End API
+
+### Option 1: Build, install, run
 
 1. initialize the project from the root directory
    ```
-   go mod init thelocr
+   go mod init thelocr.go
    go mod tidy
+   go mod vendor
    ```
-2. build all modules (`go build .` should finish without errors)
-   1. cd into sub-directories and build, e.g. `models`
-      ```
-      cd models
-      go build .
-      ```
-   2. rinse and repeat
-      ```
-      cd ../{next sub-directory}
-      go build .
-      ```
-3. cd back to root, install managefs
+2. build api
+   ```
+   go build .
+   ```
+3. install
    ```
    go install thelocr
    ```
@@ -76,7 +72,7 @@ NOTE: You must have the API running in order for the front end to function.
    ```
 6. Optional: clean up, run `go clean -modcache` to clean up install cache
 
-## Go Back End API, Option 2: Running debugger in VSCodium
+### Option 2: Running debugger in VSCodium
 
 1. Need to create the `launch.json` file under the `Run and Debug` tab
 2. Use the following configuration:
@@ -105,8 +101,40 @@ NOTE: You must have the API running in order for the front end to function.
 4. Run command `npm run dev` to start up server
 5. Navigate to localhost url provided in terminal
 
-## Why "Bowen"?
+## Auth0
 
-Simply a Marriage and Family Therapist (MFT) turned software developer giving nod to one of the theorists who helped start the MFT field.
+Signup and signin are dependent upon Auth0. This will require an Auth0 account, setting up an Application and an API, and then creating the file `web/src/auth_config.json`. There is a sample file for reference as well. 
 
-### To Be Continued...
+### Setup
+
+1. Signup for a free account from [their website](https://auth0.com/) 
+2. Create an Application
+   1. Left side menu, click `Applications > Applications`
+   2. Click `+ Create Applications`
+   3. Set a name
+   4. Select `Single Page Web Applications`
+   5. Click `Create`
+   6. Open application settings
+   7. Set `Allowed Callback URLs`
+      - e.g. `http://localhost:{port}, http://localhost:{port}/callback`
+   8. Set `Allowed logout URLs`
+      - e.g. `http://localhost:{port}`
+   9. Set `Allowed Web Origins`
+      - e.g. `http://localhost:{port}`
+   10. Click `Save Changes` at the bottom of the screen
+3. Create an API
+   1. Left side menu, click `Applications > APIs`
+   2. Click `+ Create API`
+   3. Set a name
+   4. Set an identifier, e.g. `https://auth0.domain.com/api`
+   5. click `Create`
+   6. Go to the `Permissions` tab
+      1. Set permissions
+         - e.g. `read:messages` | `Read messages`
+4. Copy the `Domain` and `ClientId` of the Applications and paste into the `auth_config.json` file
+5. Copy the `API Audience` and paste into the `auth_config.json` file
+6. Save and run the app
+
+If you run into any problems, Auth0 maintains good documentation to read through. The docs can help with setup, as well as features like adjusting how users sign in, e.g. using a password, or a social media account, through the settings of your Auth0 tenant. 
+
+If you run into errors signing in through TheLOCR's web page, pay attention to the Auth0 errors as they will give good information on how to fix the problems you run into. 

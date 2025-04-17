@@ -27,7 +27,7 @@ go.work
 
 # Dev notes
 zz_notes.txt
-auth_config.json
+web/src/auth_config.json
 *.json.dev
 
 # vscodium files
