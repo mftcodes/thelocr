@@ -12,14 +12,14 @@ export default function Landing() {
   return (
     <>
       <h2 className="text-center search pb-3">Welcome to The LOCR</h2>
-      <Container>
+      <Container className="text-center">
         <p>
           The <strong>L</strong>ibrary of <strong>O</strong>nline <strong>
           C</strong>ommunity<strong> R</strong>esources is a citizen 
           driven and maintained Community Resource Repository.
         </p>
         <p>
-          The LOCR is working toward a <em>One-Stop-Shop</em> place to find the community based
+          The LOCR is working toward a <em>One-Stop-Shop</em> site to find the community based
           non-profits, organizations, and services working to help any and all in need of assistance.
           Find food banks, mental health providers, legal aid, and more.
         </p>
