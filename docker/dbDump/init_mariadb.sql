@@ -285,6 +285,8 @@ BEGIN
 		(res_uuid, cat_id)
 	VALUES
 		(rUUID,categoryID);
+	
+	SELECT rUUID;
 END;
 
 

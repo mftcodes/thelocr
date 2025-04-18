@@ -19,7 +19,7 @@ func (rs *ResourceService) GetById(id string) (models.ResourceDetail, error) {
 	return resource, nil
 }
 
-func (rs *ResourceService) Create(res models.ResourceInsert) (sql.Result, error) {
+func (rs *ResourceService) Create(res models.ResourceInsert) (string, error) {
 	result, err := resourceRepository.Create(res)
 	if err != nil {
 		return result, err

@@ -40,7 +40,8 @@ func (rr *ResourceRepository) GetById(id string) (models.ResourceDetail, error) 
 	return resDetail, nil
 }
 
-func (rr *ResourceRepository) Create(res models.ResourceInsert) (sql.Result, error) {
+func (rr *ResourceRepository) Create(res models.ResourceInsert) (string, error) {
+	var uuid string
 	isParent := boolToBit(res.Is_parent)
 	isStatewide := boolToBit(res.Is_statewide)
 
@@ -66,11 +67,23 @@ func (rr *ResourceRepository) Create(res models.ResourceInsert) (sql.Result, err
 		sqlNullStrToStr(res.Fax),
 		sqlNullStrToStr(res.Email),
 		res.Cat_id)
-	result, err := config.DBConn.Exec(sql)
+
+	rows, err := config.DBConn.Query(sql)
 	if err != nil {
-		return result, err
+		return uuid, err
 	}
-	return result, nil
+	defer rows.Close()
+
+	for rows.Next() {
+		var _uuid string
+		err := rows.Scan(&_uuid)
+		if err != nil {
+			return uuid, err
+		}
+		uuid = _uuid
+	}
+
+	return uuid, nil
 }
 
 func (rr *ResourceRepository) SearchBase(terms models.ResourceSearchBase) ([]models.ResourceDetail, error) {
