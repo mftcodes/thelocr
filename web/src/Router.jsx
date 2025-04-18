@@ -1,4 +1,5 @@
 import { Routes, Route, Link } from "react-router-dom";
+import About from "./views/About";
 import Detail from "./views/Detail";
 import Edit from "./views/Edit";
 import Landing from "./views/Landing";
@@ -15,6 +16,7 @@ export default function Router() {
     <>
         <Routes history={history}>
             <Route path="/" exact element={<Landing />} />
+            <Route path="about" exact element={<About />} />
             <Route path="search" element={<Search />} />
             <Route path="detail" element={<Detail />} />
             <Route path="/detail/:id" element={<Detail />} />
