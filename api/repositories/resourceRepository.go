@@ -13,8 +13,8 @@ type ResourceRepository struct{}
 func (rr *ResourceRepository) GetById(id string) (models.ResourceDetail, error) {
 	var resDetail models.ResourceDetail
 	sql := fmt.Sprintf(`
-	SELECT BIN_TO_UUID(r.res_uuid) as res_uuid, r.res_title, r.res_desc, r.url, BIN_TO_UUID(a.addr_uuid) as addr_uuid, 
-		a.line_1, a.line_2, a.line_3, a.city, a.county, a.state, a.postal_code, BIN_TO_UUID(c.con_uuid) as con_uuid, 
+	SELECT r.res_uuid, r.res_title, r.res_desc, r.url, a.addr_uuid, 
+		a.line_1, a.line_2, a.line_3, a.city, a.county, a.state, a.postal_code, c.con_uuid, 
 		c.phone_1, c.phone_2, c.phone_tty, c.fax, c.email
 	FROM minuchin.resource as r
 		JOIN minuchin.detail as d on r.res_uuid = d.res_uuid
@@ -22,7 +22,7 @@ func (rr *ResourceRepository) GetById(id string) (models.ResourceDetail, error) 
 		JOIN minuchin.contact as c on d.con_uuid = c.con_uuid
 		JOIN minuchin.classification as cl on r.res_uuid = cl.res_uuid
 		RIGHT JOIN minuchin.category as ct on cl.cat_id = ct.cat_id
-	WHERE r.res_uuid = UUID_TO_BIN('%s')`, id)
+	WHERE r.res_uuid = '%s'`, id)
 
 	rows, err := config.DBConn.Query(sql)
 	if err != nil {
@@ -40,7 +40,8 @@ func (rr *ResourceRepository) GetById(id string) (models.ResourceDetail, error) 
 	return resDetail, nil
 }
 
-func (rr *ResourceRepository) Create(res models.ResourceInsert) (sql.Result, error) {
+func (rr *ResourceRepository) Create(res models.ResourceInsert) (string, error) {
+	var uuid string
 	isParent := boolToBit(res.Is_parent)
 	isStatewide := boolToBit(res.Is_statewide)
 
@@ -66,11 +67,23 @@ func (rr *ResourceRepository) Create(res models.ResourceInsert) (sql.Result, err
 		sqlNullStrToStr(res.Fax),
 		sqlNullStrToStr(res.Email),
 		res.Cat_id)
-	result, err := config.DBConn.Exec(sql)
+
+	rows, err := config.DBConn.Query(sql)
 	if err != nil {
-		return result, err
+		return uuid, err
 	}
-	return result, nil
+	defer rows.Close()
+
+	for rows.Next() {
+		var _uuid string
+		err := rows.Scan(&_uuid)
+		if err != nil {
+			return uuid, err
+		}
+		uuid = _uuid
+	}
+
+	return uuid, nil
 }
 
 func (rr *ResourceRepository) SearchBase(terms models.ResourceSearchBase) ([]models.ResourceDetail, error) {
