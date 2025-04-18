@@ -41,7 +41,7 @@ func (ur *UserRepository) Login(terms models.UserLogin) (models.User, error) {
 	var user models.User
 
 	sql := fmt.Sprintf(`
-		SELECT u.user_id, BIN_TO_UUID(u.user_uuid) as user_uuid, u.user_email, u.username, u.first_name, u.last_name, u.password, u.can_edit
+		SELECT u.user_id, u.user_uuid, u.user_email, u.username, u.first_name, u.last_name, u.password, u.can_edit
 		  FROM user as u
 		 WHERE u.username = '%s';
 	`, terms.Username)

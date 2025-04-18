@@ -13,7 +13,7 @@ func SetupLocalDevEnv() error {
 		return err
 	}
 
-	localSettingsFile := fmt.Sprintln("USER=root\nPASSWD=9YCoZ#ULdVQQvmcF\nNET=tcp\nSERVER=localhost:3308\nDB=minuchin")
+	localSettingsFile := fmt.Sprintln("USER=root\nPASSWD=9YCoZ#ULdVQQvmcF\nNET=tcp\nSERVER=localhost:3306\nDB=minuchin")
 
 	fileUri := SetLocalConfFileUri()
 	err = os.WriteFile(fileUri, []byte(localSettingsFile), 0750)
