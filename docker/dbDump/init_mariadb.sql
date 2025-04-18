@@ -285,6 +285,9 @@ BEGIN
 		(res_uuid, cat_id)
 	VALUES
 		(rUUID,categoryID);
+	
+	SELECT rUUID;
+
 END;
 
 
@@ -377,6 +380,21 @@ BEGIN
 		addr_uuid = addrUuid;
 END;
 
+## Summary
+
+- Added `About` page
+- Updated `Landing`
+- Fix header and footer reloading with each Nav Link
+
+## Justification
+
+- Make `Landing` page shorter to foster quicker navigation to search
+- Actually do the SPA thing
+- Improve Use Experience
+
+## Docs and Resources
+
+- none
 
 	/* Update Contact */
 DROP PROCEDURE IF EXISTS `minuchin`.`sp_updateContact`;
