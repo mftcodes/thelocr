@@ -62,7 +62,7 @@ export const Edit = ({isCreate = false}) => {
     }));
   };
 
-  async function update() {
+  async function createOrUpdate() {
     const payload = setPayload();
     try {
       const [resp] = await Promise.all([
@@ -78,23 +78,25 @@ export const Edit = ({isCreate = false}) => {
         ).json(),
       ]);
       const action = isCreate ? "Create" : "Edit";
+      let title = isCreate ? payload.Res_title.String : payload.Resource.Res_title.String;
       if (!resp) {
-        setEditError(`Failed to update "${payload.Resource.Res_title.String}", please try again. If this continues, please contact us.`);
+        setEditError(`Failed to ${action} "${title}", please try again. If this continues, please contact us.`);
         setIsErrorState(true);
         
         logger.debug(`Edit.jsx: Failed to ${action} resource, response empty.`)
         return;
-      } else {
-        logger.info(`Edit.jsx: ${action} resource successful.`);
-        // Success, need to go back to detail and refresh with saved data
       }
-      let redirectUri = `/detail/${payload.Resource.Res_uuid}`;
+      // Successful Create/Update, redirect to Details page
+      let uuid = isCreate ? resp : payload.Resource.Res_uuid;
+      logger.info(`Edit.jsx: ${action} resource successful for res_uuid "${uuid}".`);
+
+      let redirectUri = `/detail/${uuid}`;
       navigate(redirectUri);
     } catch (error) {
-      setEditError(`Failed to update "${payload.Resource.Res_title.String}", please try again. If this continues, please contact us.`);
-      setIsErrorState(true);
+      logger.debug(`Edit.jsx: Error attempting to ${action} a resource - ${error}`);
 
-      logger.info(`Edit.jsx: Error attemptint to ${action} a resource - ${error}`);
+      setEditError(`Failed to ${action} "${title}", please try again. If this continues, please contact us.`);
+      setIsErrorState(true);
     }
   }
 
@@ -469,7 +471,7 @@ export const Edit = ({isCreate = false}) => {
             type={"danger"}
             onClose={closeAlert}
           />}
-          <Button type="thelocr" doClick={() => update()}>
+          <Button type="thelocr" doClick={() => createOrUpdate()}>
             Submit
           </Button>
         </Form>

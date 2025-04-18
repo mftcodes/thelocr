@@ -27,13 +27,13 @@ func (rc *ResourceController) Create(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	_, err := resourceService.Create(resInput)
+	newUuid, err := resourceService.Create(resInput)
 	if err != nil {
 		logs.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.Status(http.StatusOK)
+	c.IndentedJSON(http.StatusOK, newUuid)
 }
 
 func (rc *ResourceController) Detail(c *gin.Context) {
