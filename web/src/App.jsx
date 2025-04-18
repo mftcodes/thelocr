@@ -25,9 +25,9 @@ export default function App() {
     <>
       <div id="app" className="d-flex flex-column h-100">
           <NavMenu />
-          <Container className="flex-grow-1 mt-5">
-            <Router />
-          </Container>
+            <Container className="flex-grow-1 mt-5">
+              <Router />
+            </Container>
           <Footer />
       </div>
     </>
