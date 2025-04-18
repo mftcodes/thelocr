@@ -1,50 +1,33 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Container from "react-bootstrap/esm/Container";
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export default function Landing() {
   let navigate = useNavigate();
-  const routeChange = () => {
+  const goToSearch = () => {
     navigate("/search");
   }
 
   return (
     <>
-      <h2 className="text-center search pb-3">Welcome to Project Bowen</h2>
-      <Container>
-        <p>A citizen driven and maintained Community Resource Repository.</p>
+      <h2 className="text-center search pb-3">Welcome to The LOCR</h2>
+      <Container className="text-center">
         <p>
-          With the increasing challenges of the Climate Crisis, the reduction in
-          funding for public services for those in need and at risk, and the
-          quickly changing landscape of politics, we are seeing organizations
-          come and go more quickly. Maybe someone needs housing today, and the
-          shelter that you used to refer them too has closed, where do you go?
-          Maybe a family is need of some free legal aid to help them maintain
-          their residency status, and the legal office down the street has
-          shuttered, so where does this family go? Our hope that the answer
-          becomes Project Bowen.
+          The <strong>L</strong>ibrary of <strong>O</strong>nline <strong>
+          C</strong>ommunity<strong> R</strong>esources is a citizen 
+          driven and maintained Community Resource Repository.
         </p>
         <p>
-          There are services like 211 across the country that serve a similar
-          functions, and are maintained by organization like The United Way.
-          Project Bowen is not intended to replace these services, rather be an
-          addition to. The big difference is in function. Project Bowen
-          champions Social Workers, community leaders and organizers, citizen,
-          and anyone anyone else to come and add the resources you know about in
-          your community, and update the ones that resources that have changed.
+          The LOCR is working toward a <em>One-Stop-Shop</em> site to find the community based
+          non-profits, organizations, and services working to help any and all in need of assistance.
+          Find food banks, mental health providers, legal aid, and more.
         </p>
-        <p>
-          It is our hope that this becomes the base building block to begin
-          addressing these problem, and a small beginning of a much larger
-          road map.
-        </p>
-          <Col className="text-center">
-            <Button type="bowen btn_bowen__alt" doClick={() => routeChange()} className="text-center">
-              Go find a resource
-            </Button>
-          </Col>
+        <Col className="text-center pt-3">
+          <Button type="thelocr btn_thelocr__alt" doClick={() => goToSearch()} className="text-center">
+            Go find a resource
+          </Button>
+         </Col>
       </Container>
     </>
   );

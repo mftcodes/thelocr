@@ -20,7 +20,7 @@ const CategoryDropdown = ({ label, onChoice }) => {
 
   const Toggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
-      className="btn btn_bowen"
+      className="btn btn_thelocr"
       href=""
       ref={ref}
       onClick={(e) => {

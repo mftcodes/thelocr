@@ -64,22 +64,22 @@
     color: black;
 }
 
-.btn.btn_bowen {
+.btn.btn_thelocr {
     background-color: var(--primary_dark);
     color: white;
 }
 
-.btn.btn_bowen:hover {
+.btn.btn_thelocr:hover {
     background-color: var(--primary_dark_hover);
     color: white;
 }
 
-.btn.btn_bowen__alt {
+.btn.btn_thelocr__alt {
     background-color: var(--secondary);
     color: white;
 }
 
-.btn.btn_bowen__alt:hover {
+.btn.btn_thelocr__alt:hover {
     background-color: var(--secondary_hover);
     color: white;
 }

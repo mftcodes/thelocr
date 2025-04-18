@@ -3,8 +3,8 @@ package repositories
 import (
 	"fmt"
 
-	"bowen/api/config"
-	"bowen/api/models"
+	"thelocr/api/config"
+	"thelocr/api/models"
 )
 
 type AddressRepository struct {

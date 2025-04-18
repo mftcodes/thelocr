@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -30,23 +31,24 @@ export const NavMenu = () => {
         className="text-center"
       >
         <Container className="stage">
-          <Navbar.Brand href="/">
-            <h1>Project Bowen</h1>
+          <Navbar.Brand>
+            <Nav.Link as={Link} to="/"><h1>The LOCR</h1></Nav.Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/search">Search</Nav.Link>
+              <Nav.Link as={Link} to="/">Home</Nav.Link>
+              <Nav.Link as={Link} to="/search">Search</Nav.Link>
+              <Nav.Link as={Link} to="/about">About</Nav.Link>
               {!isAuthenticated && (
-                <Nav.Link onClick={() => loginWithRedirect({})}>Login</Nav.Link>
+                <Nav.Link as={Link} onClick={() => loginWithRedirect({})}>Login</Nav.Link>
               )}
               {isAuthenticated && (
-                <Nav.Link href="/create">New Resource</Nav.Link>
+                <Nav.Link as={Link} to="/create">New Resource</Nav.Link>
               )}
               {isAuthenticated && (
                 <NavDropdown title=<strong>{user.name}</strong> id="basic-nav-dropdown">
-                  <NavDropdown.Item href="/profile">
+                  <NavDropdown.Item as={Link} to="/profile">
                     <FontAwesomeIcon icon="user" className="mr-3" /> Profile
                   </NavDropdown.Item>
                   <NavDropdown.Divider />

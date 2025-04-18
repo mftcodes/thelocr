@@ -1,8 +1,8 @@
 package services
 
 import (
-	"bowen/api/models"
-	"bowen/api/repositories"
+	"thelocr/api/models"
+	"thelocr/api/repositories"
 )
 
 type CategoryService struct{}

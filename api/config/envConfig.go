@@ -42,21 +42,21 @@ func SetupLogging() error {
 }
 
 func SetLocalConfDir() string {
-	return "/tmp/project.bowen/"
+	return "/tmp/thelocr/"
 }
 
 func SetLocalConfFileUri() string {
-	return "/tmp/project.bowen/localdev.conf"
+	return "/tmp/thelocr/localdev.conf"
 }
 
 func SetProdConfFileUri() string {
-	return "/etc/project.bowen/minuchin.conf"
+	return "/etc/thelocr/minuchin.conf"
 }
 
 func SetLoggingDir() string {
-	return "/tmp/project.bowen/logs"
+	return "/tmp/thelocr/logs"
 }
 
 func SetErrorLoggingFileUri() string {
-	return "/tmp/project.bowen/logs/LOGS.txt"
+	return "/tmp/thelocr/logs/LOGS.txt"
 }
