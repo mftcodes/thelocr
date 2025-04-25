@@ -1,4 +1,4 @@
-module thelocr
+module thelocr/api
 
 go 1.23.1
 
