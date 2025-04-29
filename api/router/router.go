@@ -19,7 +19,7 @@ func InitRouter() *gin.Engine {
 	api := r.Group("/api")
 	{
 		api.GET("", func(c *gin.Context) {
-			c.String(http.StatusOK, "Bowen API is up and running.\n")
+			c.String(http.StatusOK, "TheLocr API is up and running.\n")
 		})
 		address := api.Group("/address")
 		{
