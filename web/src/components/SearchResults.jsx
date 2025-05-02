@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import logger from "../utils/logger";
 
 const SearchResults = (payload) => {
-  const uri = "http://localhost:8080/api/resource/search";
+  const uri = `${import.meta.env.VITE_API_URI}/api/resource/search`;
   const [resources, setResources] = useState([]);
 
   async function getData() {

@@ -21,8 +21,8 @@ export const Edit = ({isCreate = false}) => {
   const navigate = useNavigate();
   const originalRes = location.state;
   const uri = isCreate 
-    ? "http://localhost:8080/api/resource/create" 
-    : "http://localhost:8080/api/resource/update";
+    ? `${import.meta.env.VITE_API_URI}/api/resource/create`
+    : `${import.meta.env.VITE_API_URI}/api/resource/update`;
   const [county, setCounty] = useState(isCreate ? "" : originalRes.County.String);
   const [countySelected, setCountySelected] = useState(false);
   const [category, setCategory] = useState("Make Selection");
