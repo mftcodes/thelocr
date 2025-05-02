@@ -16,12 +16,12 @@ func (rr *ResourceRepository) GetById(id string) (models.ResourceDetail, error) 
 	SELECT r.res_uuid, r.res_title, r.res_desc, r.url, a.addr_uuid, 
 		a.line_1, a.line_2, a.line_3, a.city, a.county, a.state, a.postal_code, c.con_uuid, 
 		c.phone_1, c.phone_2, c.phone_tty, c.fax, c.email
-	FROM minuchin.resource as r
-		JOIN minuchin.detail as d on r.res_uuid = d.res_uuid
-		JOIN minuchin.address as a on d.addr_uuid = a.addr_uuid
-		JOIN minuchin.contact as c on d.con_uuid = c.con_uuid
-		JOIN minuchin.classification as cl on r.res_uuid = cl.res_uuid
-		RIGHT JOIN minuchin.category as ct on cl.cat_id = ct.cat_id
+	FROM resource as r
+		JOIN detail as d on r.res_uuid = d.res_uuid
+		JOIN address as a on d.addr_uuid = a.addr_uuid
+		JOIN contact as c on d.con_uuid = c.con_uuid
+		JOIN classification as cl on r.res_uuid = cl.res_uuid
+		RIGHT JOIN category as ct on cl.cat_id = ct.cat_id
 	WHERE r.res_uuid = '%s'`, id)
 
 	rows, err := db.DBConn.Query(sql)
@@ -46,7 +46,7 @@ func (rr *ResourceRepository) Create(res models.ResourceInsert) (string, error) 
 	isStatewide := boolToBit(res.Is_statewide)
 
 	sql := fmt.Sprintf(`
-	CALL minuchin.sp_insertResource(%v,%v,%v,%v,%d,%v,%d,%v,%v,%v,%v,%v,%v,%v,%v,%v,%v,%v,%v,%d)`,
+	CALL sp_insertResource(%v,%v,%v,%v,%d,%v,%d,%v,%v,%v,%v,%v,%v,%v,%v,%v,%v,%v,%v,%d)`,
 		sqlNullStrToStr(res.Created_by),
 		sqlNullStrToStr(res.Res_title),
 		sqlNullStrToStr(res.Res_desc),
@@ -91,7 +91,7 @@ func (rr *ResourceRepository) SearchBase(terms models.ResourceSearchBase) ([]mod
 	isStatewide := boolToBit(terms.Is_statewide)
 
 	sql := fmt.Sprintf(`
-	CALL minuchin.sp_searchResourceBase(%d, '%s', '%s', %d);
+	CALL sp_searchResourceBase(%d, '%s', '%s', %d);
 	`, isStatewide, terms.County, terms.State, terms.Cat_id)
 
 	rows, err := db.DBConn.Query(sql)
@@ -113,7 +113,7 @@ func (rr *ResourceRepository) SearchBase(terms models.ResourceSearchBase) ([]mod
 }
 
 /* SProc Structure
- *	CALL minuchin.sp_updateFullResource(
+ *	CALL sp_updateFullResource(
  * 	:addrUuid, :line1, :line2, :line3, :city, :county, :state, :postalCode,
  *	:conUuid, :phone1, :phone2, :phoneTty, :fax, :email,
  *	:resUuid, :resTitle, :resDesc, :url, :isParent, :parentUuid, :isStatewide, :isNationwide, :keyword,
@@ -121,7 +121,7 @@ func (rr *ResourceRepository) SearchBase(terms models.ResourceSearchBase) ([]mod
  */
 func (rr *ResourceRepository) Update(res models.ResourceEdit) (sql.Result, error) {
 	sql := fmt.Sprintf(`
-	CALL minuchin.sp_updateFullResource(
+	CALL sp_updateFullResource(
 		'%s', %s, %s, %s, %s, %s, %s, %s, 
 		'%s', %s, %s, %s, %s, %s, 
 		'%s', %s, %s, %s, %d, %s, %d, %d, %s, 
