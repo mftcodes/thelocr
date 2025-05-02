@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"thelocr/api/logs"
+	"thelocr/api/logger"
 	"thelocr/api/models"
 	"thelocr/api/services"
 
@@ -23,13 +23,13 @@ var resourceService = new(services.ResourceService)
 func (rc *ResourceController) Create(c *gin.Context) {
 	var resInput models.ResourceInsert
 	if err := c.ShouldBindJSON(&resInput); err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	newUuid, err := resourceService.Create(resInput)
 	if err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -39,13 +39,13 @@ func (rc *ResourceController) Create(c *gin.Context) {
 func (rc *ResourceController) Detail(c *gin.Context) {
 	uri := Uri{}
 	if err := c.BindUri(&uri); err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
 	user, err := resourceService.GetById(uri.Res_Uuid)
 	if err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": http.StatusText(http.StatusBadRequest)})
 	}
 
@@ -55,14 +55,14 @@ func (rc *ResourceController) Detail(c *gin.Context) {
 func (rc *ResourceController) Search(c *gin.Context) {
 	var terms models.ResourceSearchBase
 	if err := c.ShouldBindJSON(&terms); err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	result, err := resourceService.SearchBase(terms)
 	if err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -73,14 +73,14 @@ func (rc *ResourceController) Search(c *gin.Context) {
 func (rc *ResourceController) Update(c *gin.Context) {
 	var res models.ResourceEdit
 	if err := c.ShouldBindJSON(&res); err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"A error": err.Error()})
 		return
 	}
 
 	result, err := resourceService.Update(res)
 	if err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.JSON(http.StatusBadRequest, gin.H{"B error": err.Error()})
 		return
 	}

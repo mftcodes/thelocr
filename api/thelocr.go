@@ -1,25 +1,28 @@
 package main
 
 import (
-	"thelocr/api/config"
-	"thelocr/api/logs"
+	"log"
+	"thelocr/api/logger"
 	"thelocr/api/router"
+	"thelocr/api/setup"
 )
 
 func main() {
-	config.SetupLogging()
-	logs.InitLogging()
-
-	logs.InfoLog.Println("Starting up LOCR API...")
-
-	env, err := config.InitDB()
+	locrEnv, err := setup.InitApp()
 	if err != nil {
-		logs.ErrorLog.Printf("Failed to setup and configure database: %s", err)
+		log.Fatal("Failed to initialize app")
 		panic(err)
 	}
-	logs.InfoLog.Printf("Env: %s", env)
 
-	router := router.InitRouter()
+	logger.InfoLog.Println("Starting up LOCR API...")
+
+	if locrEnv == "dev" {
+		logger.InfoLog.Println("Running in Debug Mode.")
+	} else {
+		logger.InfoLog.Println("Running in Production Mode.")
+	}
+
+	router := router.InitRouter(locrEnv)
 
 	router.Run(":8080")
 }

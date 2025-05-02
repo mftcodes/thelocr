@@ -13,7 +13,10 @@ var resourceController = new(controllers.ResourceController)
 var categoryController = new(controllers.CategoryController)
 var userController = new(controllers.UserController)
 
-func InitRouter() *gin.Engine {
+func InitRouter(locrEnv string) *gin.Engine {
+	if locrEnv == "prod" {
+		gin.SetMode(gin.ReleaseMode)
+	}
 	r := gin.Default()
 
 	api := r.Group("/api")

@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"thelocr/api/logs"
+	"thelocr/api/logger"
 	"thelocr/api/services"
 
 	"github.com/gin-gonic/gin"
@@ -16,7 +16,7 @@ var addressService = new(services.AddressService)
 func (ac *AddressController) List(c *gin.Context) {
 	addrs, err := addressService.GetAll()
 	if err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": http.StatusText(http.StatusBadRequest)})
 	}
 
@@ -32,7 +32,7 @@ func (ac *AddressController) Detail(c *gin.Context) {
 	}
 	addr, err := addressService.GetById(uri.Id)
 	if err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": http.StatusText(http.StatusBadRequest)})
 	}
 

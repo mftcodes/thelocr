@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"thelocr/api/config"
+	"thelocr/api/db"
 	"thelocr/api/models"
 )
 
@@ -16,7 +16,7 @@ func (cr *CategoryRepository) GetAll() ([]models.Category, error) {
 		  FROM category 
 		 ORDER BY cat_title;
 	`
-	rows, err := config.DBConn.Query(sql)
+	rows, err := db.DBConn.Query(sql)
 	if err != nil {
 		return cats, err
 	}

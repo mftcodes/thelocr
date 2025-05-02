@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"thelocr/api/config"
+	"thelocr/api/db"
 	"thelocr/api/models"
 )
 
@@ -24,7 +24,7 @@ func (rr *ResourceRepository) GetById(id string) (models.ResourceDetail, error) 
 		RIGHT JOIN minuchin.category as ct on cl.cat_id = ct.cat_id
 	WHERE r.res_uuid = '%s'`, id)
 
-	rows, err := config.DBConn.Query(sql)
+	rows, err := db.DBConn.Query(sql)
 	if err != nil {
 		return resDetail, err
 	}
@@ -68,7 +68,7 @@ func (rr *ResourceRepository) Create(res models.ResourceInsert) (string, error) 
 		sqlNullStrToStr(res.Email),
 		res.Cat_id)
 
-	rows, err := config.DBConn.Query(sql)
+	rows, err := db.DBConn.Query(sql)
 	if err != nil {
 		return uuid, err
 	}
@@ -94,7 +94,7 @@ func (rr *ResourceRepository) SearchBase(terms models.ResourceSearchBase) ([]mod
 	CALL minuchin.sp_searchResourceBase(%d, '%s', '%s', %d);
 	`, isStatewide, terms.County, terms.State, terms.Cat_id)
 
-	rows, err := config.DBConn.Query(sql)
+	rows, err := db.DBConn.Query(sql)
 	if err != nil {
 		return resDetails, err
 	}
@@ -150,7 +150,7 @@ func (rr *ResourceRepository) Update(res models.ResourceEdit) (sql.Result, error
 		boolToBit(res.Resource.Is_nationwide),
 		sqlNullStrToStr(res.Resource.Keyword),
 		sqlNullStrToStr(res.Resource.Modified_by))
-	result, err := config.DBConn.Exec(sql)
+	result, err := db.DBConn.Exec(sql)
 	if err != nil {
 		return result, err
 	}
