@@ -2,9 +2,11 @@ package router
 
 import (
 	"net/http"
+	"time"
 
 	"thelocr/api/controllers"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,6 +20,24 @@ func InitRouter(locrEnv string) *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.Default()
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"GET", "POST", "PUT", "OPTIONS"},
+		AllowHeaders: []string{"Origin"},
+		ExposeHeaders: []string{
+			"Content-Length",
+			"application/json",
+			"application/x-www-form-urlencoded",
+			"multipart/form-data",
+			"Access-Control-Allow-Headers",
+			"content-type"},
+		AllowCredentials: true,
+		AllowOriginFunc: func(origin string) bool {
+			return origin == "http://localhost:5173"
+		},
+		MaxAge: 12 * time.Hour,
+	}))
 
 	api := r.Group("/api")
 	{
