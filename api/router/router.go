@@ -16,6 +16,24 @@ var userController = new(controllers.UserController)
 func InitRouter() *gin.Engine {
 	r := gin.Default()
 
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"GET", "POST", "PUT", "OPTIONS"},
+		AllowHeaders: []string{"Origin", "content-type"},
+		ExposeHeaders: []string{
+			"Content-Length",
+			"application/json",
+			"application/x-www-form-urlencoded",
+			"multipart/form-data",
+			"Access-Control-Allow-Headers",
+			"content-type"},
+		AllowCredentials: true,
+		AllowOriginFunc: func(origin string) bool {
+			return origin == "http://localhost:5173"
+		},
+		MaxAge: 12 * time.Hour,
+	}))
+
 	api := r.Group("/api")
 	{
 		api.GET("", func(c *gin.Context) {

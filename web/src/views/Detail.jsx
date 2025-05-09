@@ -84,16 +84,15 @@ export default function Detail() {
   return (
     <>
       {!resource.Res_title.Valid && (
-        <h2 className="text-center search pb-3 pt-2">
+        <h1 className="text-center search pb-3 pt-2">
           Loading...
-        </h2>
+        </h1>
       )}
       {resource.Res_title.Valid && (
-      <div>
-        <h2 className="text-center search pb-3 pt-2">
-          {resource.Res_title.String}
-        </h2>
-        <Container style={{ maxWidth: "50rem" }}>
+        <Container>
+          <h1 className="text-center">
+            {resource.Res_title.String}
+          </h1>
           <h3>Description</h3>
           <hr />
           <p className="pb-3">{resource.Res_desc.String}</p>
@@ -205,7 +204,6 @@ export default function Detail() {
             </Row>
           }
         </Container>
-      </div>
       )}
     </>
   );
