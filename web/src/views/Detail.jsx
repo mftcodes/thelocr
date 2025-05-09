@@ -11,7 +11,7 @@ export default function Detail() {
   const { isAuthenticated } = useAuth0();
   const id = useParams();
   const hasId = Object.keys(id).length !== 0;
-  const uri = hasId ? `http://localhost:8080/api/resource/${id.id}` : "";
+  const uri = hasId ? `${import.meta.env.VITE_API_URI}/api/resource/${id.id}` : "";
   const location = useLocation();
   const locState = location.state != 0 ? location.state : {};
   let [resource, setResource] = useState({

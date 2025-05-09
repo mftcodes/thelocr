@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"thelocr/api/config"
+	"thelocr/api/db"
 	"thelocr/api/models"
 
 	"golang.org/x/crypto/bcrypt"
@@ -21,7 +21,7 @@ func (ur *UserRepository) GetById(id string) (models.User, error) {
 		  FROM user 
 		 WHERE user_id = %s;
 	`, id)
-	rows, err := config.DBConn.Query(sql)
+	rows, err := db.DBConn.Query(sql)
 	if err != nil {
 		return user, err
 	}
@@ -45,7 +45,7 @@ func (ur *UserRepository) Login(terms models.UserLogin) (models.User, error) {
 		  FROM user as u
 		 WHERE u.username = '%s';
 	`, terms.Username)
-	rows, err := config.DBConn.Query(sql)
+	rows, err := db.DBConn.Query(sql)
 	if err != nil {
 		return user, err
 	}
@@ -78,7 +78,7 @@ func (ur *UserRepository) Create(terms models.UserCreate) (sql.Result, error) {
 		VALUES('%s', '%s', '%s', '%s', '%s');
 	`, terms.Email, terms.Username, terms.First_name, terms.Last_name, hpass)
 
-	result, err := config.DBConn.Exec(sql)
+	result, err := db.DBConn.Exec(sql)
 	if err != nil {
 		return result, err
 	}

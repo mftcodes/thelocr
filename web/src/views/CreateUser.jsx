@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import logger from "../utils/logger";
 
 export default function CreateUser() {
-  const uri = "http://localhost:8080/api/user/create";
+  const uri = `${import.meta.env.VITE_API_URI}/api/user/create`;
   const [user, setUser] = useState({
     User_email: "",
     Username: "",
