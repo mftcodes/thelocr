@@ -16,17 +16,17 @@ var (
 	DBConn *sql.DB
 )
 
-func InitApp() (locrEnv string, err error) {
-	envs, err := LoadDotEnv()
+func InitApp() (envs map[string]string, err error) {
+	envs, err = LoadDotEnv()
 	if err != nil {
-		return locrEnv, err
+		return envs, err
 	}
 
-	locrEnv = envs["LOCR_ENV"]
+	locrEnv := envs["LOCR_ENV"]
 
 	logFileUri, err := SetupLogFile(locrEnv, envs)
 	if err != nil {
-		return locrEnv, err
+		return envs, err
 	}
 
 	logger.InitLogging(logFileUri)
@@ -39,7 +39,7 @@ func InitApp() (locrEnv string, err error) {
 	}
 	logger.InfoLog.Println("DB Successfully initialized")
 
-	return locrEnv, nil
+	return envs, nil
 }
 
 func LoadDotEnv() (map[string]string, error) {

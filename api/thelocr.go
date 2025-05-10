@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	locrEnv, err := setup.InitApp()
+	envs, err := setup.InitApp()
 	if err != nil {
 		log.Fatal("Failed to initialize app")
 		panic(err)
@@ -16,13 +16,13 @@ func main() {
 
 	logger.InfoLog.Println("Starting up LOCR API...")
 
-	if locrEnv == "dev" {
+	if envs["LOCR_ENV"] == "dev" {
 		logger.InfoLog.Println("Running in Debug Mode.")
 	} else {
 		logger.InfoLog.Println("Running in Production Mode.")
 	}
 
-	router := router.InitRouter(locrEnv)
+	router := router.InitRouter(envs)
 
 	router.Run(":8080")
 }

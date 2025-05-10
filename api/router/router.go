@@ -15,7 +15,8 @@ var resourceController = new(controllers.ResourceController)
 var categoryController = new(controllers.CategoryController)
 var userController = new(controllers.UserController)
 
-func InitRouter(locrEnv string) *gin.Engine {
+func InitRouter(envs map[string]string) *gin.Engine {
+	locrEnv := envs["LOCR_ENV"]
 	if locrEnv == "prod" {
 		gin.SetMode(gin.ReleaseMode)
 	}
@@ -34,7 +35,7 @@ func InitRouter(locrEnv string) *gin.Engine {
 			"content-type"},
 		AllowCredentials: true,
 		AllowOriginFunc: func(origin string) bool {
-			return origin == "http://localhost:5173"
+			return origin == envs["CORS_ORIGIN"]
 		},
 		MaxAge: 12 * time.Hour,
 	}))
