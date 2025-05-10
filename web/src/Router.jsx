@@ -6,6 +6,7 @@ import Landing from "./views/Landing";
 import Search from "./views/Search";
 import Profile from "./views/Profile";
 import history from "./utils/history";
+import Privacy from "./views/PrivacyPolicy";
 
 // fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
@@ -23,6 +24,7 @@ export default function Router() {
             <Route path="create" element={<Edit isCreate={true} />} />
             <Route path="edit" element={<Edit isCreate={false} />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="privacy" element={<Privacy />} />
 
             {/* path="*"" matches anything, so acts as a
                 catch for things we haven't setup */}
