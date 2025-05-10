@@ -3,7 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 
 const CategoryDropdown = ({ label, onChoice }) => {
-  const uri = "http://localhost:8080/api/category";
+  const uri = `${import.meta.env.VITE_API_URI}/api/category`;
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     fetch(uri)

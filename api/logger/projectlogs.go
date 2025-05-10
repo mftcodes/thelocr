@@ -1,10 +1,8 @@
-package logs
+package logger
 
 import (
 	"log"
 	"os"
-
-	"thelocr/api/config"
 )
 
 var (
@@ -13,9 +11,8 @@ var (
 	ErrorLog   *log.Logger
 )
 
-func InitLogging() {
-	var fileName = config.SetErrorLoggingFileUri()
-	file, err := os.OpenFile(fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+func InitLogging(logFileUri string) {
+	file, err := os.OpenFile(logFileUri, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
