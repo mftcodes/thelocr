@@ -11,11 +11,13 @@ export default function Landing() {
 
   return (
     <>
-      <h2 className="text-center search pb-3">Welcome to The LOCR</h2>
+      <div class="text-center">
+        <img src="./src/assets/logo_full.png" class="img_logo__landing"/>
+      </div>
       <Container className="text-center">
         <p>
           The <strong>L</strong>ibrary of <strong>O</strong>nline <strong>
-          C</strong>ommunity<strong> R</strong>esources is a citizen 
+          C</strong>ommunity<strong> R</strong>esources is a citizen
           driven and maintained Community Resource Repository.
         </p>
         <p>
