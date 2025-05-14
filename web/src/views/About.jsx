@@ -11,8 +11,8 @@ export default function About() {
 
   return (
     <>
-      <h2 className="text-center search pb-3">About The LOCR</h2>
-      <Container>
+      <Container className="text-center">
+      <h1 className="text-center">About The LOCR</h1>
         <p>
           The <strong>L</strong>ibrary of <strong>O</strong>nline <strong>
           C</strong>ommunity<strong> R</strong>esources is a citizen 

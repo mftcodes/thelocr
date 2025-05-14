@@ -1,6 +1,6 @@
 import Router from './Router';
 import Container from "react-bootstrap/Container";
-import { NavMenu } from "./components/NavMenu";
+import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "./components/Loading";
@@ -24,8 +24,8 @@ export default function App() {
   return (
     <>
       <div id="app" className="d-flex flex-column h-100">
-          <NavMenu />
-            <Container className="flex-grow-1 mt-5">
+          <Header />
+            <Container className="flex-grow-1">
               <Router />
             </Container>
           <Footer />

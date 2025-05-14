@@ -10,7 +10,7 @@ export const ProfileComponent = () => {
   const { user } = useAuth0();
 
   return (
-    <Container className="mb-5">
+    <Container>
       <Row className="align-items-center profile-header mb-5 text-md-left">
         <Col md={2}>
           <img
@@ -25,7 +25,7 @@ export const ProfileComponent = () => {
         </Col>
       </Row>
       <Row className="align-items-center text-center">
-        <p>Placeholder for favorites, edited resources, etc.</p>
+        <p>Coming Soon: Favorites, created and edited resources, and more!</p>
       </Row>
     </Container>
   );

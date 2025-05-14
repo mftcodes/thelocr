@@ -22,7 +22,7 @@ export default function Search() {
   return (
     <>
       <Container>
-        <h2 className="text-center search">Community Resources Search</h2>
+        <h1 className="text-center">Community Resources Search</h1>
 
         <CountyDropdown
           label={`County: ${county}   `}

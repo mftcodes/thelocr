@@ -17,12 +17,12 @@
 
 #footer {
     background-color: var(--title);
-    height: 5rem;
+    height: auto;
     width: 100%;
     position: absolute;
     bottom: 0;
     color: white;
-    padding: 2em 0;
+    padding: 1.2em 0;
     text-align: center;
 
     .stage {
@@ -44,6 +44,11 @@
     max-width: 60em;
 }
 
+#app > .container > .container {
+    padding-top: 1em;
+    padding-bottom: 3em;
+}
+
 .row > .container > .card_bg {
     background-color: var(--primary_light);
     color: black;
@@ -54,10 +59,6 @@
     background-color: var(--secondary);
     color: black;
     min-height: 18.5rem;
-}
-
-.search {
-    color: black;
 }
 
 .results {
@@ -84,6 +85,20 @@
     color: white;
 }
 
+.btn.btn_thelocr__footer {
+    background-color: inherit;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.btn.btn_thelocr__footer:hover {
+    background-color: inherit;
+    color: #C5CBD0;
+    cursor: pointer;
+    border: none;
+}
+
 .dropdown-menu {
     max-height: 55svh;
     overflow-y: scroll;
@@ -100,4 +115,9 @@
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+.img_logo__landing {
+    width: 100%;
+    max-width: 500px;
 }

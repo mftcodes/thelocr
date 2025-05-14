@@ -179,8 +179,8 @@ export const Edit = ({isCreate = false}) => {
 
   return (
     <>
-      <h2 className="text-center search pb-3">{title}</h2>
       <Container>
+        <h1 className="text-center">{title}</h1>
         <Form>
           {/* *** RESOURCE NAME/TITLE *** */}
           <Form.Group as={Row} className="mb-3" controlId="formTitle">
