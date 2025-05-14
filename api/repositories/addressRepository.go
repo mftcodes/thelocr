@@ -3,7 +3,7 @@ package repositories
 import (
 	"fmt"
 
-	"thelocr/api/config"
+	"thelocr/api/db"
 	"thelocr/api/models"
 )
 
@@ -18,7 +18,7 @@ func (ar *AddressRepository) GetById(id string) (models.Address, error) {
 		  FROM address 
 		 WHERE addr_id = %s;
 	`, id)
-	rows, err := config.DBConn.Query(sql)
+	rows, err := db.DBConn.Query(sql)
 	if err != nil {
 		return addr, err
 	}
@@ -42,7 +42,7 @@ func (ar *AddressRepository) GetAll() ([]models.Address, error) {
 		  FROM address 
 		 ORDER BY addr_id;
 	`
-	rows, err := config.DBConn.Query(sql)
+	rows, err := db.DBConn.Query(sql)
 	if err != nil {
 		panic(err)
 	}

@@ -24,6 +24,7 @@ go.work
 # config & env
 *.conf
 .env
+api/api
 
 # Dev notes
 zz_notes.txt

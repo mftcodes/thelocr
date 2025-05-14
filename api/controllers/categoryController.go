@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"thelocr/api/logs"
+	"thelocr/api/logger"
 	"thelocr/api/services"
 
 	"github.com/gin-gonic/gin"
@@ -16,7 +16,7 @@ var categoryService = new(services.CategoryService)
 func (cc *CategoryController) List(c *gin.Context) {
 	cats, err := categoryService.GetAll()
 	if err != nil {
-		logs.ErrorLog.Printf("%v", err)
+		logger.ErrorLog.Printf("%v", err)
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": http.StatusText(http.StatusBadRequest)})
 	}
 
