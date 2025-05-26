@@ -11,8 +11,8 @@ export default function Landing() {
 
   return (
     <>
-      <div class="text-center">
-        <img src="./src/assets/logo_full.png" class="img_logo__landing"/>
+      <div className="text-center">
+        <img src="./assets/logo_full.png" className="img_logo__landing"/>
       </div>
       <Container className="text-center">
         <p>

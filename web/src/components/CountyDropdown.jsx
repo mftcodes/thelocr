@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
-import counties from "../assets/mi_counties.json"
+import counties from "../../assets/mi_counties.json"
 
 const CountyDropdown = ({ label, onChoice }) => {
   // The forwardRef is important!!

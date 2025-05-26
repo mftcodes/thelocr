@@ -17,6 +17,9 @@ export const Footer = () => {
   const goPrivacy = () => {
     navigate("/privacy");
   }
+  const goSupport = () => {
+    navigate("/support");
+  }
 
   const d = new Date();
   let year = d.getFullYear();
@@ -30,6 +33,7 @@ export const Footer = () => {
             <Col><Button type="thelocr btn_thelocr__footer" doClick={() => goSearch()}>Search</Button></Col>
             <Col><Button type="thelocr btn_thelocr__footer" doClick={() => goPrivacy()}>Privacy Policy</Button></Col>
             <Col><Button type="thelocr btn_thelocr__footer" doClick={() => goAbout()}>About</Button></Col>
+            <Col><Button type="thelocr btn_thelocr__footer" doClick={() => goSupport()}>Support</Button></Col>
             <Col> </Col>
           </Row>
           <Row className="mt-1">

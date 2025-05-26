@@ -24,5 +24,5 @@ func main() {
 
 	router := router.InitRouter(locrEnv)
 
-	router.Run(":8080")
+	router.Run()
 }
